@@ -30,7 +30,7 @@ jobs:
         run: sudo snap install blender --channel=3.6lts/stable --classic
       - name: Install armsdk
         run: |
-          git clone --recurse-submodules https://github.com/armory3d/armsdk.git
+          git clone --branch dev --recurse-submodules https://github.com/QuantumCoderQC/armsdk.git
           git clone --recurse-submodules https://github.com/QuantumCoderQC/ArmoryBuildFilesGH.git
           blender -noaudio -b -P ArmoryBuildFilesGH/enable_addon.py
       - name: Build examples
