@@ -1,0 +1,290 @@
+#version 300 es
+precision mediump float;
+precision highp int;
+
+const vec3 _944[3] = vec3[](vec3(1.0, 0.0, 0.0), vec3(0.0, 1.0, 0.0), vec3(0.0, 1.0, 0.0));
+const float _957[3] = float[](0.0, 1.0, 1.0);
+
+uniform highp vec4 casData[20];
+uniform highp samplerCubeShadow shadowMapPoint[1];
+uniform highp vec2 lightProj;
+uniform highp sampler2D senvmapBrdf;
+uniform highp vec4 shirr[7];
+uniform int envmapNumMipmaps;
+uniform highp sampler2D senvmapRadiance;
+uniform highp float envmapStrength;
+uniform highp vec3 sunDir;
+uniform bool receiveShadow;
+uniform highp sampler2DShadow shadowMap;
+uniform highp vec3 eye;
+uniform highp float shadowsBias;
+uniform highp vec3 sunCol;
+uniform highp vec3 pointPos;
+uniform highp vec3 pointCol;
+uniform highp float pointBias;
+
+in highp vec3 wnormal;
+in highp vec3 eyeDir;
+in highp vec3 wposition;
+out highp vec4 fragColor[2];
+
+highp vec3 surfaceAlbedo(highp vec3 baseColor, highp float metalness)
+{
+    return mix(baseColor, vec3(0.0), vec3(metalness));
+}
+
+highp vec3 surfaceF0(highp vec3 baseColor, highp float metalness)
+{
+    return mix(vec3(0.039999999105930328369140625), baseColor, vec3(metalness));
+}
+
+highp vec3 shIrradiance(highp vec3 nor, highp vec4 shirr_1[7])
+{
+    highp vec3 cl00 = vec3(shirr_1[0].x, shirr_1[0].y, shirr_1[0].z);
+    highp vec3 cl1m1 = vec3(shirr_1[0].w, shirr_1[1].x, shirr_1[1].y);
+    highp vec3 cl10 = vec3(shirr_1[1].z, shirr_1[1].w, shirr_1[2].x);
+    highp vec3 cl11 = vec3(shirr_1[2].y, shirr_1[2].z, shirr_1[2].w);
+    highp vec3 cl2m2 = vec3(shirr_1[3].x, shirr_1[3].y, shirr_1[3].z);
+    highp vec3 cl2m1 = vec3(shirr_1[3].w, shirr_1[4].x, shirr_1[4].y);
+    highp vec3 cl20 = vec3(shirr_1[4].z, shirr_1[4].w, shirr_1[5].x);
+    highp vec3 cl21 = vec3(shirr_1[5].y, shirr_1[5].z, shirr_1[5].w);
+    highp vec3 cl22 = vec3(shirr_1[6].x, shirr_1[6].y, shirr_1[6].z);
+    return ((((((((((cl22 * 0.429042994976043701171875) * ((nor.y * nor.y) - ((-nor.z) * (-nor.z)))) + (((cl20 * 0.743125021457672119140625) * nor.x) * nor.x)) + (cl00 * 0.88622701168060302734375)) - (cl20 * 0.2477079927921295166015625)) + (((cl2m2 * 0.85808598995208740234375) * nor.y) * (-nor.z))) + (((cl21 * 0.85808598995208740234375) * nor.y) * nor.x)) + (((cl2m1 * 0.85808598995208740234375) * (-nor.z)) * nor.x)) + ((cl11 * 1.02332794666290283203125) * nor.y)) + ((cl1m1 * 1.02332794666290283203125) * (-nor.z))) + ((cl10 * 1.02332794666290283203125) * nor.x);
+}
+
+highp float getMipFromRoughness(highp float roughness, highp float numMipmaps)
+{
+    return roughness * numMipmaps;
+}
+
+highp vec2 envMapEquirect(highp vec3 normal)
+{
+    highp float phi = acos(normal.z);
+    highp float theta = atan(-normal.y, normal.x) + 3.1415927410125732421875;
+    return vec2(theta / 6.283185482025146484375, phi / 3.1415927410125732421875);
+}
+
+highp mat4 getCascadeMat(highp float d, inout int casi, inout int casIndex)
+{
+    highp vec4 comp = vec4(float(d > casData[16].x), float(d > casData[16].y), float(d > casData[16].z), float(d > casData[16].w));
+    casi = int(min(dot(vec4(1.0), comp), 4.0));
+    casIndex = casi * 4;
+    return mat4(vec4(casData[casIndex]), vec4(casData[casIndex + 1]), vec4(casData[casIndex + 2]), vec4(casData[casIndex + 3]));
+}
+
+highp float PCF(highp sampler2DShadow shadowMap_1, highp vec2 uv, highp float compare, highp vec2 smSize)
+{
+    highp vec3 _252 = vec3(uv + (vec2(-1.0) / smSize), compare);
+    highp float result = texture(shadowMap_1, vec3(_252.xy, _252.z));
+    highp vec3 _261 = vec3(uv + (vec2(-1.0, 0.0) / smSize), compare);
+    result += texture(shadowMap_1, vec3(_261.xy, _261.z));
+    highp vec3 _272 = vec3(uv + (vec2(-1.0, 1.0) / smSize), compare);
+    result += texture(shadowMap_1, vec3(_272.xy, _272.z));
+    highp vec3 _283 = vec3(uv + (vec2(0.0, -1.0) / smSize), compare);
+    result += texture(shadowMap_1, vec3(_283.xy, _283.z));
+    highp vec3 _291 = vec3(uv, compare);
+    result += texture(shadowMap_1, vec3(_291.xy, _291.z));
+    highp vec3 _302 = vec3(uv + (vec2(0.0, 1.0) / smSize), compare);
+    result += texture(shadowMap_1, vec3(_302.xy, _302.z));
+    highp vec3 _313 = vec3(uv + (vec2(1.0, -1.0) / smSize), compare);
+    result += texture(shadowMap_1, vec3(_313.xy, _313.z));
+    highp vec3 _324 = vec3(uv + (vec2(1.0, 0.0) / smSize), compare);
+    result += texture(shadowMap_1, vec3(_324.xy, _324.z));
+    highp vec3 _335 = vec3(uv + (vec2(1.0) / smSize), compare);
+    result += texture(shadowMap_1, vec3(_335.xy, _335.z));
+    return result / 9.0;
+}
+
+highp float shadowTestCascade(highp sampler2DShadow shadowMap_1, highp vec3 eye_1, highp vec3 p, highp float shadowsBias_1)
+{
+    highp float d = distance(eye_1, p);
+    int param;
+    int param_1;
+    highp mat4 _583 = getCascadeMat(d, param, param_1);
+    int casi = param;
+    int casIndex = param_1;
+    highp mat4 LWVP = _583;
+    highp vec4 lPos = LWVP * vec4(p, 1.0);
+    highp vec3 _598 = lPos.xyz / vec3(lPos.w);
+    lPos = vec4(_598.x, _598.y, _598.z, lPos.w);
+    highp float visibility = 1.0;
+    if (lPos.w > 0.0)
+    {
+        visibility = PCF(shadowMap_1, lPos.xy, lPos.z - shadowsBias_1, vec2(4096.0, 1024.0));
+    }
+    highp float nextSplit = casData[16][casi];
+    highp float _624;
+    if (casi == 0)
+    {
+        _624 = nextSplit;
+    }
+    else
+    {
+        _624 = nextSplit - casData[16][casi - 1];
+    }
+    highp float splitSize = _624;
+    highp float splitDist = (nextSplit - d) / splitSize;
+    if ((splitDist <= 0.1500000059604644775390625) && (casi != 3))
+    {
+        int casIndex2 = casIndex + 4;
+        highp mat4 LWVP2 = mat4(vec4(casData[casIndex2]), vec4(casData[casIndex2 + 1]), vec4(casData[casIndex2 + 2]), vec4(casData[casIndex2 + 3]));
+        highp vec4 lPos2 = LWVP2 * vec4(p, 1.0);
+        highp vec3 _702 = lPos2.xyz / vec3(lPos2.w);
+        lPos2 = vec4(_702.x, _702.y, _702.z, lPos2.w);
+        highp float visibility2 = 1.0;
+        if (lPos2.w > 0.0)
+        {
+            visibility2 = PCF(shadowMap_1, lPos2.xy, lPos2.z - shadowsBias_1, vec2(4096.0, 1024.0));
+        }
+        highp float lerpAmt = smoothstep(0.0, 0.1500000059604644775390625, splitDist);
+        return mix(visibility2, visibility, lerpAmt);
+    }
+    return visibility;
+}
+
+highp vec3 lambertDiffuseBRDF(highp vec3 albedo, highp float nl)
+{
+    return albedo * nl;
+}
+
+highp float d_ggx(highp float nh, highp float a)
+{
+    highp float a2 = a * a;
+    highp float denom = ((nh * nh) * (a2 - 1.0)) + 1.0;
+    denom = max(denom * denom, 6.103515625e-05);
+    return (a2 * 0.3183098733425140380859375) / denom;
+}
+
+highp float g2_approx(highp float NdotL, highp float NdotV, highp float alpha)
+{
+    highp vec2 helper = (vec2(NdotL, NdotV) * 2.0) * (vec2(1.0) / ((vec2(NdotL, NdotV) * (2.0 - alpha)) + vec2(alpha)));
+    return max(helper.x * helper.y, 0.0);
+}
+
+highp vec3 f_schlick(highp vec3 f0, highp float vh)
+{
+    return f0 + ((vec3(1.0) - f0) * exp2((((-5.554729938507080078125) * vh) - 6.9831600189208984375) * vh));
+}
+
+highp vec3 specularBRDF(highp vec3 f0, highp float roughness, highp float nl, highp float nh, highp float nv, highp float vh)
+{
+    highp float a = roughness * roughness;
+    return (f_schlick(f0, vh) * (d_ggx(nh, a) * g2_approx(nl, nv, a))) / vec3(max(4.0 * nv, 9.9999997473787516355514526367188e-06));
+}
+
+highp float attenuate(highp float dist)
+{
+    return 1.0 / (dist * dist);
+}
+
+highp float lpToDepth(inout highp vec3 lp, highp vec2 lightProj_1)
+{
+    lp = abs(lp);
+    highp float zcomp = max(lp.x, max(lp.y, lp.z));
+    zcomp = lightProj_1.x - (lightProj_1.y / zcomp);
+    return (zcomp * 0.5) + 0.5;
+}
+
+highp float PCFCube(highp samplerCubeShadow shadowMapCube, highp vec3 lp, inout highp vec3 ml, highp float bias, highp vec2 lightProj_1, highp vec3 n)
+{
+    highp vec3 param = lp;
+    highp float _369 = lpToDepth(param, lightProj_1);
+    highp float compare = _369 - (bias * 1.5);
+    ml += ((n * bias) * 20.0);
+    highp vec4 _385 = vec4(ml, compare);
+    highp float result = texture(shadowMapCube, vec4(_385.xyz, _385.w));
+    highp vec4 _397 = vec4(ml + vec3(0.001000000047497451305389404296875), compare);
+    result += texture(shadowMapCube, vec4(_397.xyz, _397.w));
+    highp vec4 _411 = vec4(ml + vec3(-0.001000000047497451305389404296875, 0.001000000047497451305389404296875, 0.001000000047497451305389404296875), compare);
+    result += texture(shadowMapCube, vec4(_411.xyz, _411.w));
+    highp vec4 _424 = vec4(ml + vec3(0.001000000047497451305389404296875, -0.001000000047497451305389404296875, 0.001000000047497451305389404296875), compare);
+    result += texture(shadowMapCube, vec4(_424.xyz, _424.w));
+    highp vec4 _437 = vec4(ml + vec3(0.001000000047497451305389404296875, 0.001000000047497451305389404296875, -0.001000000047497451305389404296875), compare);
+    result += texture(shadowMapCube, vec4(_437.xyz, _437.w));
+    highp vec4 _450 = vec4(ml + vec3(-0.001000000047497451305389404296875, -0.001000000047497451305389404296875, 0.001000000047497451305389404296875), compare);
+    result += texture(shadowMapCube, vec4(_450.xyz, _450.w));
+    highp vec4 _463 = vec4(ml + vec3(0.001000000047497451305389404296875, -0.001000000047497451305389404296875, -0.001000000047497451305389404296875), compare);
+    result += texture(shadowMapCube, vec4(_463.xyz, _463.w));
+    highp vec4 _476 = vec4(ml + vec3(-0.001000000047497451305389404296875, 0.001000000047497451305389404296875, -0.001000000047497451305389404296875), compare);
+    result += texture(shadowMapCube, vec4(_476.xyz, _476.w));
+    highp vec4 _489 = vec4(ml + vec3(-0.001000000047497451305389404296875), compare);
+    result += texture(shadowMapCube, vec4(_489.xyz, _489.w));
+    return result / 9.0;
+}
+
+highp vec3 sampleLight(highp vec3 p, highp vec3 n, highp vec3 v, highp float dotNV, highp vec3 lp, highp vec3 lightCol, highp vec3 albedo, highp float rough, highp float spec, highp vec3 f0, int index, highp float bias, bool receiveShadow_1)
+{
+    highp vec3 ld = lp - p;
+    highp vec3 l = normalize(ld);
+    highp vec3 h = normalize(v + l);
+    highp float dotNH = max(0.0, dot(n, h));
+    highp float dotVH = max(0.0, dot(v, h));
+    highp float dotNL = max(0.0, dot(n, l));
+    highp vec3 direct = lambertDiffuseBRDF(albedo, dotNL) + (specularBRDF(f0, rough, dotNL, dotNH, dotNV, dotVH) * spec);
+    direct *= attenuate(distance(p, lp));
+    direct *= lightCol;
+    if (receiveShadow_1)
+    {
+        highp vec3 param = -l;
+        highp float _779 = PCFCube(shadowMapPoint[0], ld, param, bias, lightProj, n);
+        direct *= _779;
+    }
+    return direct;
+}
+
+void main()
+{
+    highp vec3 n = normalize(wnormal);
+    highp vec3 vVec = normalize(eyeDir);
+    highp float dotNV = max(dot(n, vVec), 0.0);
+    highp vec3 Geometry_Position_res = wposition;
+    Geometry_Position_res = Geometry_Position_res;
+    highp float SeparateXYZ_Z_res = Geometry_Position_res.z;
+    highp float Math_001_Value_res = SeparateXYZ_Z_res + 2.2999999523162841796875;
+    highp float Math_Value_res = Math_001_Value_res / 8.0;
+    highp float ColorRamp_fac = Math_Value_res;
+    int ColorRamp_i = 0 + int(ColorRamp_fac > 1.0);
+    highp vec3 ColorRamp_Color_res = mix(_944[ColorRamp_i], _944[ColorRamp_i + 1], vec3(max((ColorRamp_fac - _957[ColorRamp_i]) * (1.0 / (_957[ColorRamp_i + 1] - _957[ColorRamp_i])), 0.0)));
+    highp vec3 basecol = ColorRamp_Color_res;
+    highp float roughness = 0.5;
+    highp float metallic = 0.0;
+    highp float occlusion = 1.0;
+    highp float specular = 0.5;
+    highp vec3 emissionCol = vec3(0.0);
+    highp float opacity = 0.4997999966144561767578125;
+    if (opacity == 1.0)
+    {
+        discard;
+    }
+    highp vec3 albedo = surfaceAlbedo(basecol, metallic);
+    highp vec3 f0 = surfaceF0(basecol, metallic);
+    highp vec2 envBRDF = texelFetch(senvmapBrdf, ivec2(vec2(dotNV, 1.0 - roughness) * 256.0), 0).xy;
+    highp vec3 indirect = shIrradiance(n, shirr);
+    indirect *= albedo;
+    highp vec3 reflectionWorld = reflect(-vVec, n);
+    highp float lod = getMipFromRoughness(roughness, float(envmapNumMipmaps));
+    highp vec3 prefilteredColor = textureLod(senvmapRadiance, envMapEquirect(reflectionWorld), lod).xyz;
+    indirect += ((prefilteredColor * ((f0 * envBRDF.x) + vec3(envBRDF.y))) * 1.5);
+    indirect *= occlusion;
+    indirect *= envmapStrength;
+    highp vec3 direct = vec3(0.0);
+    highp float svisibility = 1.0;
+    highp vec3 sh = normalize(vVec + sunDir);
+    highp float sdotNL = dot(n, sunDir);
+    highp float sdotNH = dot(n, sh);
+    highp float sdotVH = dot(vVec, sh);
+    if (receiveShadow)
+    {
+        svisibility = shadowTestCascade(shadowMap, eye, wposition + ((n * shadowsBias) * 10.0), shadowsBias);
+    }
+    direct += (((lambertDiffuseBRDF(albedo, sdotNL) + (specularBRDF(f0, roughness, sdotNL, sdotNH, dotNV, sdotVH) * specular)) * sunCol) * svisibility);
+    int param = 0;
+    highp float param_1 = pointBias;
+    bool param_2 = receiveShadow;
+    direct += sampleLight(wposition, n, vVec, dotNV, pointPos, pointCol, albedo, roughness, specular, f0, param, param_1, param_2);
+    highp vec4 premultipliedReflect = vec4(vec3(direct + (indirect * 0.5)) * opacity, opacity);
+    highp float w = clamp((pow(min(1.0, premultipliedReflect.w * 10.0) + 0.00999999977648258209228515625, 3.0) * 100000000.0) * pow(1.0 - (gl_FragCoord.z * 0.89999997615814208984375), 3.0), 0.00999999977648258209228515625, 3000.0);
+    fragColor[0] = vec4(premultipliedReflect.xyz * w, premultipliedReflect.w);
+    fragColor[1] = vec4(premultipliedReflect.w * w, 0.0, 0.0, 1.0);
+}
+

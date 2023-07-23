@@ -1,0 +1,986 @@
+#version 300 es
+precision mediump float;
+precision highp int;
+
+uniform highp vec2 cameraProj;
+uniform highp float _time;
+
+in highp vec3 eyeDir;
+in highp vec3 wposition;
+
+highp float linearize(highp float depth, highp vec2 cameraProj_1)
+{
+    return cameraProj_1.y / (depth - cameraProj_1.x);
+}
+
+highp vec3 safe_divide(highp vec3 a, highp vec3 b)
+{
+    highp float _36;
+    if (b.x != 0.0)
+    {
+        _36 = a.x / b.x;
+    }
+    else
+    {
+        _36 = 0.0;
+    }
+    highp float _46;
+    if (b.y != 0.0)
+    {
+        _46 = a.y / b.y;
+    }
+    else
+    {
+        _46 = 0.0;
+    }
+    highp float _57;
+    if (b.z != 0.0)
+    {
+        _57 = a.z / b.z;
+    }
+    else
+    {
+        _57 = 0.0;
+    }
+    return vec3(_36, _46, _57);
+}
+
+void main()
+{
+    highp vec3 vVec = normalize(eyeDir);
+    highp vec3 Geometry_Position_res = wposition;
+    Geometry_Position_res = Geometry_Position_res;
+    highp vec3 Geometry_Incoming_res = vVec;
+    Geometry_Incoming_res = Geometry_Incoming_res;
+    highp vec2 param = cameraProj;
+    highp float CameraData_ViewZDepth_res = linearize(gl_FragCoord.z, param);
+    CameraData_ViewZDepth_res = CameraData_ViewZDepth_res;
+    highp vec3 VectorMath_001_Vector_res = Geometry_Incoming_res * CameraData_ViewZDepth_res;
+    highp vec3 VectorMath_Vector_res = Geometry_Position_res + VectorMath_001_Vector_res;
+    highp vec3 Group_001_GroupInput_Cam_res = VectorMath_Vector_res;
+    highp vec3 Group_001_Cam_res = Group_001_GroupInput_Cam_res;
+    highp vec3 Group_GroupInput_Cam_res = Group_001_Cam_res;
+    highp vec3 Group_Cam_res = Group_GroupInput_Cam_res;
+    highp vec3 Group_002_GroupInput_Cam_res = Group_Cam_res;
+    highp vec3 Group_002_Cam_res = Group_002_GroupInput_Cam_res;
+    highp vec3 Group_003_GroupInput_Cam_res = Group_002_Cam_res;
+    highp vec3 Group_003_Cam_res = Group_003_GroupInput_Cam_res;
+    highp vec3 Group_004_GroupInput_Cam_res = Group_003_Cam_res;
+    highp vec3 Group_004_Cam_res = Group_004_GroupInput_Cam_res;
+    highp vec3 Group_007_GroupInput_Cam_res = Group_004_Cam_res;
+    highp vec3 Group_007_Cam_res = Group_007_GroupInput_Cam_res;
+    highp vec3 Group_005_GroupInput_Cam_res = Group_007_Cam_res;
+    highp vec3 Group_005_Cam_res = Group_005_GroupInput_Cam_res;
+    highp vec3 Group_006_GroupInput_Cam_res = Group_005_Cam_res;
+    highp vec3 VectorMath_002_Vector_res = Geometry_Incoming_res * (-1.0);
+    highp vec3 Group_001_GroupInput_ViewDir_res = VectorMath_002_Vector_res;
+    highp vec3 Group_001_ViewDir_res = Group_001_GroupInput_ViewDir_res;
+    highp vec3 Group_GroupInput_ViewDir_res = Group_001_ViewDir_res;
+    highp vec3 Group_ViewDir_res = Group_GroupInput_ViewDir_res;
+    highp vec3 Group_002_GroupInput_ViewDir_res = Group_ViewDir_res;
+    highp vec3 Group_002_ViewDir_res = Group_002_GroupInput_ViewDir_res;
+    highp vec3 Group_003_GroupInput_ViewDir_res = Group_002_ViewDir_res;
+    highp vec3 Group_003_ViewDir_res = Group_003_GroupInput_ViewDir_res;
+    highp vec3 Group_004_GroupInput_ViewDir_res = Group_003_ViewDir_res;
+    highp vec3 Group_004_ViewDir_res = Group_004_GroupInput_ViewDir_res;
+    highp vec3 Group_007_GroupInput_ViewDir_res = Group_004_ViewDir_res;
+    highp vec3 Group_007_ViewDir_res = Group_007_GroupInput_ViewDir_res;
+    highp vec3 Group_005_GroupInput_ViewDir_res = Group_007_ViewDir_res;
+    highp vec3 Group_005_ViewDir_res = Group_005_GroupInput_ViewDir_res;
+    highp vec3 Group_006_GroupInput_ViewDir_res = Group_005_ViewDir_res;
+    highp float Group_001_GroupInput_Depth_res = 0.0;
+    highp vec3 Group_001_VectorMath_001_Vector_res = Group_001_GroupInput_ViewDir_res * Group_001_GroupInput_Depth_res;
+    highp vec3 Group_001_VectorMath_Vector_res = Group_001_GroupInput_Cam_res + Group_001_VectorMath_001_Vector_res;
+    highp vec3 Group_001_Group_001_GroupInput_Vector_res = Group_001_VectorMath_Vector_res;
+    highp vec3 Group_Group_001_Group_001_GroupInput_Vector_res = Group_001_Group_001_GroupInput_Vector_res;
+    highp float Group_001_Group_001_ShaderData_Float_res = _time;
+    highp float Group_001_Group_001_Math_003_Value_res = Group_001_Group_001_ShaderData_Float_res * 0.333000004291534423828125;
+    highp float Group_001_Group_001_Math_015_Value_res = Group_001_Group_001_Math_003_Value_res + 2.7999999523162841796875;
+    highp float Group_001_Group_001_Math_001_Value_res = mod(Group_001_Group_001_Math_015_Value_res, 6.0);
+    highp float Group_001_Group_001_Math_019_Value_res = 3.0;
+    highp float Group_001_Group_001_Math_002_Value_res = Group_001_Group_001_Math_001_Value_res - Group_001_Group_001_Math_019_Value_res;
+    highp vec3 Group_001_Group_001_CombineXYZ_Vector_res = vec3(0.25, -0.1500000059604644775390625, Group_001_Group_001_Math_002_Value_res);
+    highp vec3 Group_Group_001_Group_001_GroupInput_Position_res = Group_001_Group_001_CombineXYZ_Vector_res;
+    highp vec3 Group_Group_001_Group_001_VectorMath_Vector_res = Group_Group_001_Group_001_GroupInput_Vector_res + Group_Group_001_Group_001_GroupInput_Position_res;
+    highp vec3 Group_Group_001_Group_001_GroupInput_Radius_res = vec3(0.25, 0.333000004291534423828125, 0.25);
+    highp vec3 Group_Group_001_Group_001_VectorMath_001_Vector_res = safe_divide(Group_Group_001_Group_001_VectorMath_Vector_res, Group_Group_001_Group_001_GroupInput_Radius_res);
+    highp float Group_Group_001_Group_001_VectorMath_003_Value_res = length(Group_Group_001_Group_001_VectorMath_001_Vector_res);
+    highp float Group_Group_001_Group_001_Math_001_Value_res = Group_Group_001_Group_001_VectorMath_003_Value_res - 1.0;
+    highp float Group_Group_001_Group_001_Math_002_Value_res = Group_Group_001_Group_001_Math_001_Value_res * Group_Group_001_Group_001_VectorMath_003_Value_res;
+    highp vec3 Group_Group_001_Group_001_VectorMath_004_Vector_res = Group_Group_001_Group_001_GroupInput_Radius_res * Group_Group_001_Group_001_GroupInput_Radius_res;
+    highp vec3 Group_Group_001_Group_001_VectorMath_005_Vector_res = safe_divide(Group_Group_001_Group_001_VectorMath_Vector_res, Group_Group_001_Group_001_VectorMath_004_Vector_res);
+    highp float Group_Group_001_Group_001_VectorMath_006_Value_res = length(Group_Group_001_Group_001_VectorMath_005_Vector_res);
+    highp float Group_Group_001_Group_001_Math_Value_res = Group_Group_001_Group_001_Math_002_Value_res / Group_Group_001_Group_001_VectorMath_006_Value_res;
+    highp float Group_001_Group_001_Group_Distance_res = Group_Group_001_Group_001_Math_Value_res;
+    highp vec3 Group_002_Group_001_Group_001_GroupInput_Vector_res = Group_001_Group_001_GroupInput_Vector_res;
+    highp float Group_001_Group_001_Math_008_Value_res = Group_001_Group_001_ShaderData_Float_res * (-0.45899999141693115234375);
+    highp float Group_001_Group_001_Math_017_Value_res = Group_001_Group_001_Math_008_Value_res + 1.7999999523162841796875;
+    highp float Group_001_Group_001_Math_007_Value_res = mod(Group_001_Group_001_Math_017_Value_res, 6.0);
+    highp float Group_001_Group_001_Math_006_Value_res = Group_001_Group_001_Math_007_Value_res - Group_001_Group_001_Math_019_Value_res;
+    highp vec3 Group_001_Group_001_CombineXYZ_001_Vector_res = vec3(0.1500000059604644775390625, -0.25, Group_001_Group_001_Math_006_Value_res);
+    highp vec3 Group_002_Group_001_Group_001_GroupInput_Position_res = Group_001_Group_001_CombineXYZ_001_Vector_res;
+    highp vec3 Group_002_Group_001_Group_001_VectorMath_Vector_res = Group_002_Group_001_Group_001_GroupInput_Vector_res + Group_002_Group_001_Group_001_GroupInput_Position_res;
+    highp vec3 Group_002_Group_001_Group_001_GroupInput_Radius_res = vec3(0.25, 0.1500000059604644775390625, 0.1500000059604644775390625);
+    highp vec3 Group_002_Group_001_Group_001_VectorMath_001_Vector_res = safe_divide(Group_002_Group_001_Group_001_VectorMath_Vector_res, Group_002_Group_001_Group_001_GroupInput_Radius_res);
+    highp float Group_002_Group_001_Group_001_VectorMath_003_Value_res = length(Group_002_Group_001_Group_001_VectorMath_001_Vector_res);
+    highp float Group_002_Group_001_Group_001_Math_001_Value_res = Group_002_Group_001_Group_001_VectorMath_003_Value_res - 1.0;
+    highp float Group_002_Group_001_Group_001_Math_002_Value_res = Group_002_Group_001_Group_001_Math_001_Value_res * Group_002_Group_001_Group_001_VectorMath_003_Value_res;
+    highp vec3 Group_002_Group_001_Group_001_VectorMath_004_Vector_res = Group_002_Group_001_Group_001_GroupInput_Radius_res * Group_002_Group_001_Group_001_GroupInput_Radius_res;
+    highp vec3 Group_002_Group_001_Group_001_VectorMath_005_Vector_res = safe_divide(Group_002_Group_001_Group_001_VectorMath_Vector_res, Group_002_Group_001_Group_001_VectorMath_004_Vector_res);
+    highp float Group_002_Group_001_Group_001_VectorMath_006_Value_res = length(Group_002_Group_001_Group_001_VectorMath_005_Vector_res);
+    highp float Group_002_Group_001_Group_001_Math_Value_res = Group_002_Group_001_Group_001_Math_002_Value_res / Group_002_Group_001_Group_001_VectorMath_006_Value_res;
+    highp float Group_001_Group_001_Group_002_Distance_res = Group_002_Group_001_Group_001_Math_Value_res;
+    highp float _309;
+    if (true)
+    {
+        _309 = min(Group_001_Group_001_Group_Distance_res, Group_001_Group_001_Group_002_Distance_res) - (((((max(0.7999999523162841796875 - abs(Group_001_Group_001_Group_Distance_res - Group_001_Group_001_Group_002_Distance_res), 0.0) / 0.7999999523162841796875) * (max(0.7999999523162841796875 - abs(Group_001_Group_001_Group_Distance_res - Group_001_Group_001_Group_002_Distance_res), 0.0) / 0.7999999523162841796875)) * (max(0.7999999523162841796875 - abs(Group_001_Group_001_Group_Distance_res - Group_001_Group_001_Group_002_Distance_res), 0.0) / 0.7999999523162841796875)) * 0.7999999523162841796875) * 0.16666667163372039794921875);
+    }
+    else
+    {
+        _309 = min(Group_001_Group_001_Group_Distance_res, Group_001_Group_001_Group_002_Distance_res);
+    }
+    highp float Group_001_Group_001_Math_Value_res = _309;
+    highp vec3 Group_003_Group_001_Group_001_GroupInput_Vector_res = Group_001_Group_001_GroupInput_Vector_res;
+    highp float Group_001_Group_001_Math_011_Value_res = Group_001_Group_001_ShaderData_Float_res * 0.5;
+    highp float Group_001_Group_001_Math_016_Value_res = Group_001_Group_001_Math_011_Value_res + 1.099999904632568359375;
+    highp float Group_001_Group_001_Math_010_Value_res = mod(Group_001_Group_001_Math_016_Value_res, 6.0);
+    highp float Group_001_Group_001_Math_009_Value_res = Group_001_Group_001_Math_010_Value_res - Group_001_Group_001_Math_019_Value_res;
+    highp vec3 Group_001_Group_001_CombineXYZ_002_Vector_res = vec3(-0.1500000059604644775390625, 0.25, Group_001_Group_001_Math_009_Value_res);
+    highp vec3 Group_003_Group_001_Group_001_GroupInput_Position_res = Group_001_Group_001_CombineXYZ_002_Vector_res;
+    highp vec3 Group_003_Group_001_Group_001_VectorMath_Vector_res = Group_003_Group_001_Group_001_GroupInput_Vector_res + Group_003_Group_001_Group_001_GroupInput_Position_res;
+    highp vec3 Group_003_Group_001_Group_001_GroupInput_Radius_res = vec3(0.300000011920928955078125, 0.12999999523162841796875, 0.20000000298023223876953125);
+    highp vec3 Group_003_Group_001_Group_001_VectorMath_001_Vector_res = safe_divide(Group_003_Group_001_Group_001_VectorMath_Vector_res, Group_003_Group_001_Group_001_GroupInput_Radius_res);
+    highp float Group_003_Group_001_Group_001_VectorMath_003_Value_res = length(Group_003_Group_001_Group_001_VectorMath_001_Vector_res);
+    highp float Group_003_Group_001_Group_001_Math_001_Value_res = Group_003_Group_001_Group_001_VectorMath_003_Value_res - 1.0;
+    highp float Group_003_Group_001_Group_001_Math_002_Value_res = Group_003_Group_001_Group_001_Math_001_Value_res * Group_003_Group_001_Group_001_VectorMath_003_Value_res;
+    highp vec3 Group_003_Group_001_Group_001_VectorMath_004_Vector_res = Group_003_Group_001_Group_001_GroupInput_Radius_res * Group_003_Group_001_Group_001_GroupInput_Radius_res;
+    highp vec3 Group_003_Group_001_Group_001_VectorMath_005_Vector_res = safe_divide(Group_003_Group_001_Group_001_VectorMath_Vector_res, Group_003_Group_001_Group_001_VectorMath_004_Vector_res);
+    highp float Group_003_Group_001_Group_001_VectorMath_006_Value_res = length(Group_003_Group_001_Group_001_VectorMath_005_Vector_res);
+    highp float Group_003_Group_001_Group_001_Math_Value_res = Group_003_Group_001_Group_001_Math_002_Value_res / Group_003_Group_001_Group_001_VectorMath_006_Value_res;
+    highp float Group_001_Group_001_Group_003_Distance_res = Group_003_Group_001_Group_001_Math_Value_res;
+    highp float _411;
+    if (true)
+    {
+        _411 = min(Group_001_Group_001_Math_Value_res, Group_001_Group_001_Group_003_Distance_res) - (((((max(0.5 - abs(Group_001_Group_001_Math_Value_res - Group_001_Group_001_Group_003_Distance_res), 0.0) / 0.5) * (max(0.5 - abs(Group_001_Group_001_Math_Value_res - Group_001_Group_001_Group_003_Distance_res), 0.0) / 0.5)) * (max(0.5 - abs(Group_001_Group_001_Math_Value_res - Group_001_Group_001_Group_003_Distance_res), 0.0) / 0.5)) * 0.5) * 0.16666667163372039794921875);
+    }
+    else
+    {
+        _411 = min(Group_001_Group_001_Math_Value_res, Group_001_Group_001_Group_003_Distance_res);
+    }
+    highp float Group_001_Group_001_Math_004_Value_res = _411;
+    highp vec3 Group_005_Group_001_Group_001_GroupInput_Vector_res = Group_001_Group_001_GroupInput_Vector_res;
+    highp float Group_001_Group_001_Math_014_Value_res = Group_001_Group_001_ShaderData_Float_res * (-0.3589999973773956298828125);
+    highp float Group_001_Group_001_Math_018_Value_res = Group_001_Group_001_Math_014_Value_res + 0.39999997615814208984375;
+    highp float Group_001_Group_001_Math_013_Value_res = mod(Group_001_Group_001_Math_018_Value_res, 6.0);
+    highp float Group_001_Group_001_Math_012_Value_res = Group_001_Group_001_Math_013_Value_res - Group_001_Group_001_Math_019_Value_res;
+    highp vec3 Group_001_Group_001_CombineXYZ_003_Vector_res = vec3(-0.25, 0.1500000059604644775390625, Group_001_Group_001_Math_012_Value_res);
+    highp vec3 Group_005_Group_001_Group_001_GroupInput_Position_res = Group_001_Group_001_CombineXYZ_003_Vector_res;
+    highp vec3 Group_005_Group_001_Group_001_VectorMath_Vector_res = Group_005_Group_001_Group_001_GroupInput_Vector_res + Group_005_Group_001_Group_001_GroupInput_Position_res;
+    highp vec3 Group_005_Group_001_Group_001_GroupInput_Radius_res = vec3(0.1500000059604644775390625, 0.300000011920928955078125, 0.25);
+    highp vec3 Group_005_Group_001_Group_001_VectorMath_001_Vector_res = safe_divide(Group_005_Group_001_Group_001_VectorMath_Vector_res, Group_005_Group_001_Group_001_GroupInput_Radius_res);
+    highp float Group_005_Group_001_Group_001_VectorMath_003_Value_res = length(Group_005_Group_001_Group_001_VectorMath_001_Vector_res);
+    highp float Group_005_Group_001_Group_001_Math_001_Value_res = Group_005_Group_001_Group_001_VectorMath_003_Value_res - 1.0;
+    highp float Group_005_Group_001_Group_001_Math_002_Value_res = Group_005_Group_001_Group_001_Math_001_Value_res * Group_005_Group_001_Group_001_VectorMath_003_Value_res;
+    highp vec3 Group_005_Group_001_Group_001_VectorMath_004_Vector_res = Group_005_Group_001_Group_001_GroupInput_Radius_res * Group_005_Group_001_Group_001_GroupInput_Radius_res;
+    highp vec3 Group_005_Group_001_Group_001_VectorMath_005_Vector_res = safe_divide(Group_005_Group_001_Group_001_VectorMath_Vector_res, Group_005_Group_001_Group_001_VectorMath_004_Vector_res);
+    highp float Group_005_Group_001_Group_001_VectorMath_006_Value_res = length(Group_005_Group_001_Group_001_VectorMath_005_Vector_res);
+    highp float Group_005_Group_001_Group_001_Math_Value_res = Group_005_Group_001_Group_001_Math_002_Value_res / Group_005_Group_001_Group_001_VectorMath_006_Value_res;
+    highp float Group_001_Group_001_Group_005_Distance_res = Group_005_Group_001_Group_001_Math_Value_res;
+    highp float _508;
+    if (true)
+    {
+        _508 = min(Group_001_Group_001_Math_004_Value_res, Group_001_Group_001_Group_005_Distance_res) - (((((max(0.4000000059604644775390625 - abs(Group_001_Group_001_Math_004_Value_res - Group_001_Group_001_Group_005_Distance_res), 0.0) / 0.4000000059604644775390625) * (max(0.4000000059604644775390625 - abs(Group_001_Group_001_Math_004_Value_res - Group_001_Group_001_Group_005_Distance_res), 0.0) / 0.4000000059604644775390625)) * (max(0.4000000059604644775390625 - abs(Group_001_Group_001_Math_004_Value_res - Group_001_Group_001_Group_005_Distance_res), 0.0) / 0.4000000059604644775390625)) * 0.4000000059604644775390625) * 0.16666667163372039794921875);
+    }
+    else
+    {
+        _508 = min(Group_001_Group_001_Math_004_Value_res, Group_001_Group_001_Group_005_Distance_res);
+    }
+    highp float Group_001_Group_001_Math_005_Value_res = _508;
+    highp float Group_001_Group_001_Distance_res = Group_001_Group_001_Math_005_Value_res;
+    highp float Group_001_Math_Value_res = Group_001_Group_001_Distance_res + Group_001_GroupInput_Depth_res;
+    highp float Group_001_Depth_res = Group_001_Math_Value_res;
+    highp float Group_GroupInput_Depth_res = Group_001_Depth_res;
+    highp vec3 Group_VectorMath_001_Vector_res = Group_GroupInput_ViewDir_res * Group_GroupInput_Depth_res;
+    highp vec3 Group_VectorMath_Vector_res = Group_GroupInput_Cam_res + Group_VectorMath_001_Vector_res;
+    highp vec3 Group_001_Group_GroupInput_Vector_res = Group_VectorMath_Vector_res;
+    highp vec3 Group_Group_001_Group_GroupInput_Vector_res = Group_001_Group_GroupInput_Vector_res;
+    highp float Group_001_Group_ShaderData_Float_res = _time;
+    highp float Group_001_Group_Math_003_Value_res = Group_001_Group_ShaderData_Float_res * 0.333000004291534423828125;
+    highp float Group_001_Group_Math_015_Value_res = Group_001_Group_Math_003_Value_res + 2.7999999523162841796875;
+    highp float Group_001_Group_Math_001_Value_res = mod(Group_001_Group_Math_015_Value_res, 6.0);
+    highp float Group_001_Group_Math_019_Value_res = 3.0;
+    highp float Group_001_Group_Math_002_Value_res = Group_001_Group_Math_001_Value_res - Group_001_Group_Math_019_Value_res;
+    highp vec3 Group_001_Group_CombineXYZ_Vector_res = vec3(0.25, -0.1500000059604644775390625, Group_001_Group_Math_002_Value_res);
+    highp vec3 Group_Group_001_Group_GroupInput_Position_res = Group_001_Group_CombineXYZ_Vector_res;
+    highp vec3 Group_Group_001_Group_VectorMath_Vector_res = Group_Group_001_Group_GroupInput_Vector_res + Group_Group_001_Group_GroupInput_Position_res;
+    highp vec3 Group_Group_001_Group_GroupInput_Radius_res = vec3(0.25, 0.333000004291534423828125, 0.25);
+    highp vec3 Group_Group_001_Group_VectorMath_001_Vector_res = safe_divide(Group_Group_001_Group_VectorMath_Vector_res, Group_Group_001_Group_GroupInput_Radius_res);
+    highp float Group_Group_001_Group_VectorMath_003_Value_res = length(Group_Group_001_Group_VectorMath_001_Vector_res);
+    highp float Group_Group_001_Group_Math_001_Value_res = Group_Group_001_Group_VectorMath_003_Value_res - 1.0;
+    highp float Group_Group_001_Group_Math_002_Value_res = Group_Group_001_Group_Math_001_Value_res * Group_Group_001_Group_VectorMath_003_Value_res;
+    highp vec3 Group_Group_001_Group_VectorMath_004_Vector_res = Group_Group_001_Group_GroupInput_Radius_res * Group_Group_001_Group_GroupInput_Radius_res;
+    highp vec3 Group_Group_001_Group_VectorMath_005_Vector_res = safe_divide(Group_Group_001_Group_VectorMath_Vector_res, Group_Group_001_Group_VectorMath_004_Vector_res);
+    highp float Group_Group_001_Group_VectorMath_006_Value_res = length(Group_Group_001_Group_VectorMath_005_Vector_res);
+    highp float Group_Group_001_Group_Math_Value_res = Group_Group_001_Group_Math_002_Value_res / Group_Group_001_Group_VectorMath_006_Value_res;
+    highp float Group_001_Group_Group_Distance_res = Group_Group_001_Group_Math_Value_res;
+    highp vec3 Group_002_Group_001_Group_GroupInput_Vector_res = Group_001_Group_GroupInput_Vector_res;
+    highp float Group_001_Group_Math_008_Value_res = Group_001_Group_ShaderData_Float_res * (-0.45899999141693115234375);
+    highp float Group_001_Group_Math_017_Value_res = Group_001_Group_Math_008_Value_res + 1.7999999523162841796875;
+    highp float Group_001_Group_Math_007_Value_res = mod(Group_001_Group_Math_017_Value_res, 6.0);
+    highp float Group_001_Group_Math_006_Value_res = Group_001_Group_Math_007_Value_res - Group_001_Group_Math_019_Value_res;
+    highp vec3 Group_001_Group_CombineXYZ_001_Vector_res = vec3(0.1500000059604644775390625, -0.25, Group_001_Group_Math_006_Value_res);
+    highp vec3 Group_002_Group_001_Group_GroupInput_Position_res = Group_001_Group_CombineXYZ_001_Vector_res;
+    highp vec3 Group_002_Group_001_Group_VectorMath_Vector_res = Group_002_Group_001_Group_GroupInput_Vector_res + Group_002_Group_001_Group_GroupInput_Position_res;
+    highp vec3 Group_002_Group_001_Group_GroupInput_Radius_res = vec3(0.25, 0.1500000059604644775390625, 0.1500000059604644775390625);
+    highp vec3 Group_002_Group_001_Group_VectorMath_001_Vector_res = safe_divide(Group_002_Group_001_Group_VectorMath_Vector_res, Group_002_Group_001_Group_GroupInput_Radius_res);
+    highp float Group_002_Group_001_Group_VectorMath_003_Value_res = length(Group_002_Group_001_Group_VectorMath_001_Vector_res);
+    highp float Group_002_Group_001_Group_Math_001_Value_res = Group_002_Group_001_Group_VectorMath_003_Value_res - 1.0;
+    highp float Group_002_Group_001_Group_Math_002_Value_res = Group_002_Group_001_Group_Math_001_Value_res * Group_002_Group_001_Group_VectorMath_003_Value_res;
+    highp vec3 Group_002_Group_001_Group_VectorMath_004_Vector_res = Group_002_Group_001_Group_GroupInput_Radius_res * Group_002_Group_001_Group_GroupInput_Radius_res;
+    highp vec3 Group_002_Group_001_Group_VectorMath_005_Vector_res = safe_divide(Group_002_Group_001_Group_VectorMath_Vector_res, Group_002_Group_001_Group_VectorMath_004_Vector_res);
+    highp float Group_002_Group_001_Group_VectorMath_006_Value_res = length(Group_002_Group_001_Group_VectorMath_005_Vector_res);
+    highp float Group_002_Group_001_Group_Math_Value_res = Group_002_Group_001_Group_Math_002_Value_res / Group_002_Group_001_Group_VectorMath_006_Value_res;
+    highp float Group_001_Group_Group_002_Distance_res = Group_002_Group_001_Group_Math_Value_res;
+    highp float _682;
+    if (true)
+    {
+        _682 = min(Group_001_Group_Group_Distance_res, Group_001_Group_Group_002_Distance_res) - (((((max(0.7999999523162841796875 - abs(Group_001_Group_Group_Distance_res - Group_001_Group_Group_002_Distance_res), 0.0) / 0.7999999523162841796875) * (max(0.7999999523162841796875 - abs(Group_001_Group_Group_Distance_res - Group_001_Group_Group_002_Distance_res), 0.0) / 0.7999999523162841796875)) * (max(0.7999999523162841796875 - abs(Group_001_Group_Group_Distance_res - Group_001_Group_Group_002_Distance_res), 0.0) / 0.7999999523162841796875)) * 0.7999999523162841796875) * 0.16666667163372039794921875);
+    }
+    else
+    {
+        _682 = min(Group_001_Group_Group_Distance_res, Group_001_Group_Group_002_Distance_res);
+    }
+    highp float Group_001_Group_Math_Value_res = _682;
+    highp vec3 Group_003_Group_001_Group_GroupInput_Vector_res = Group_001_Group_GroupInput_Vector_res;
+    highp float Group_001_Group_Math_011_Value_res = Group_001_Group_ShaderData_Float_res * 0.5;
+    highp float Group_001_Group_Math_016_Value_res = Group_001_Group_Math_011_Value_res + 1.099999904632568359375;
+    highp float Group_001_Group_Math_010_Value_res = mod(Group_001_Group_Math_016_Value_res, 6.0);
+    highp float Group_001_Group_Math_009_Value_res = Group_001_Group_Math_010_Value_res - Group_001_Group_Math_019_Value_res;
+    highp vec3 Group_001_Group_CombineXYZ_002_Vector_res = vec3(-0.1500000059604644775390625, 0.25, Group_001_Group_Math_009_Value_res);
+    highp vec3 Group_003_Group_001_Group_GroupInput_Position_res = Group_001_Group_CombineXYZ_002_Vector_res;
+    highp vec3 Group_003_Group_001_Group_VectorMath_Vector_res = Group_003_Group_001_Group_GroupInput_Vector_res + Group_003_Group_001_Group_GroupInput_Position_res;
+    highp vec3 Group_003_Group_001_Group_GroupInput_Radius_res = vec3(0.300000011920928955078125, 0.12999999523162841796875, 0.20000000298023223876953125);
+    highp vec3 Group_003_Group_001_Group_VectorMath_001_Vector_res = safe_divide(Group_003_Group_001_Group_VectorMath_Vector_res, Group_003_Group_001_Group_GroupInput_Radius_res);
+    highp float Group_003_Group_001_Group_VectorMath_003_Value_res = length(Group_003_Group_001_Group_VectorMath_001_Vector_res);
+    highp float Group_003_Group_001_Group_Math_001_Value_res = Group_003_Group_001_Group_VectorMath_003_Value_res - 1.0;
+    highp float Group_003_Group_001_Group_Math_002_Value_res = Group_003_Group_001_Group_Math_001_Value_res * Group_003_Group_001_Group_VectorMath_003_Value_res;
+    highp vec3 Group_003_Group_001_Group_VectorMath_004_Vector_res = Group_003_Group_001_Group_GroupInput_Radius_res * Group_003_Group_001_Group_GroupInput_Radius_res;
+    highp vec3 Group_003_Group_001_Group_VectorMath_005_Vector_res = safe_divide(Group_003_Group_001_Group_VectorMath_Vector_res, Group_003_Group_001_Group_VectorMath_004_Vector_res);
+    highp float Group_003_Group_001_Group_VectorMath_006_Value_res = length(Group_003_Group_001_Group_VectorMath_005_Vector_res);
+    highp float Group_003_Group_001_Group_Math_Value_res = Group_003_Group_001_Group_Math_002_Value_res / Group_003_Group_001_Group_VectorMath_006_Value_res;
+    highp float Group_001_Group_Group_003_Distance_res = Group_003_Group_001_Group_Math_Value_res;
+    highp float _776;
+    if (true)
+    {
+        _776 = min(Group_001_Group_Math_Value_res, Group_001_Group_Group_003_Distance_res) - (((((max(0.5 - abs(Group_001_Group_Math_Value_res - Group_001_Group_Group_003_Distance_res), 0.0) / 0.5) * (max(0.5 - abs(Group_001_Group_Math_Value_res - Group_001_Group_Group_003_Distance_res), 0.0) / 0.5)) * (max(0.5 - abs(Group_001_Group_Math_Value_res - Group_001_Group_Group_003_Distance_res), 0.0) / 0.5)) * 0.5) * 0.16666667163372039794921875);
+    }
+    else
+    {
+        _776 = min(Group_001_Group_Math_Value_res, Group_001_Group_Group_003_Distance_res);
+    }
+    highp float Group_001_Group_Math_004_Value_res = _776;
+    highp vec3 Group_005_Group_001_Group_GroupInput_Vector_res = Group_001_Group_GroupInput_Vector_res;
+    highp float Group_001_Group_Math_014_Value_res = Group_001_Group_ShaderData_Float_res * (-0.3589999973773956298828125);
+    highp float Group_001_Group_Math_018_Value_res = Group_001_Group_Math_014_Value_res + 0.39999997615814208984375;
+    highp float Group_001_Group_Math_013_Value_res = mod(Group_001_Group_Math_018_Value_res, 6.0);
+    highp float Group_001_Group_Math_012_Value_res = Group_001_Group_Math_013_Value_res - Group_001_Group_Math_019_Value_res;
+    highp vec3 Group_001_Group_CombineXYZ_003_Vector_res = vec3(-0.25, 0.1500000059604644775390625, Group_001_Group_Math_012_Value_res);
+    highp vec3 Group_005_Group_001_Group_GroupInput_Position_res = Group_001_Group_CombineXYZ_003_Vector_res;
+    highp vec3 Group_005_Group_001_Group_VectorMath_Vector_res = Group_005_Group_001_Group_GroupInput_Vector_res + Group_005_Group_001_Group_GroupInput_Position_res;
+    highp vec3 Group_005_Group_001_Group_GroupInput_Radius_res = vec3(0.1500000059604644775390625, 0.300000011920928955078125, 0.25);
+    highp vec3 Group_005_Group_001_Group_VectorMath_001_Vector_res = safe_divide(Group_005_Group_001_Group_VectorMath_Vector_res, Group_005_Group_001_Group_GroupInput_Radius_res);
+    highp float Group_005_Group_001_Group_VectorMath_003_Value_res = length(Group_005_Group_001_Group_VectorMath_001_Vector_res);
+    highp float Group_005_Group_001_Group_Math_001_Value_res = Group_005_Group_001_Group_VectorMath_003_Value_res - 1.0;
+    highp float Group_005_Group_001_Group_Math_002_Value_res = Group_005_Group_001_Group_Math_001_Value_res * Group_005_Group_001_Group_VectorMath_003_Value_res;
+    highp vec3 Group_005_Group_001_Group_VectorMath_004_Vector_res = Group_005_Group_001_Group_GroupInput_Radius_res * Group_005_Group_001_Group_GroupInput_Radius_res;
+    highp vec3 Group_005_Group_001_Group_VectorMath_005_Vector_res = safe_divide(Group_005_Group_001_Group_VectorMath_Vector_res, Group_005_Group_001_Group_VectorMath_004_Vector_res);
+    highp float Group_005_Group_001_Group_VectorMath_006_Value_res = length(Group_005_Group_001_Group_VectorMath_005_Vector_res);
+    highp float Group_005_Group_001_Group_Math_Value_res = Group_005_Group_001_Group_Math_002_Value_res / Group_005_Group_001_Group_VectorMath_006_Value_res;
+    highp float Group_001_Group_Group_005_Distance_res = Group_005_Group_001_Group_Math_Value_res;
+    highp float _870;
+    if (true)
+    {
+        _870 = min(Group_001_Group_Math_004_Value_res, Group_001_Group_Group_005_Distance_res) - (((((max(0.4000000059604644775390625 - abs(Group_001_Group_Math_004_Value_res - Group_001_Group_Group_005_Distance_res), 0.0) / 0.4000000059604644775390625) * (max(0.4000000059604644775390625 - abs(Group_001_Group_Math_004_Value_res - Group_001_Group_Group_005_Distance_res), 0.0) / 0.4000000059604644775390625)) * (max(0.4000000059604644775390625 - abs(Group_001_Group_Math_004_Value_res - Group_001_Group_Group_005_Distance_res), 0.0) / 0.4000000059604644775390625)) * 0.4000000059604644775390625) * 0.16666667163372039794921875);
+    }
+    else
+    {
+        _870 = min(Group_001_Group_Math_004_Value_res, Group_001_Group_Group_005_Distance_res);
+    }
+    highp float Group_001_Group_Math_005_Value_res = _870;
+    highp float Group_Group_001_Distance_res = Group_001_Group_Math_005_Value_res;
+    highp float Group_Math_Value_res = Group_Group_001_Distance_res + Group_GroupInput_Depth_res;
+    highp float Group_Depth_res = Group_Math_Value_res;
+    highp float Group_002_GroupInput_Depth_res = Group_Depth_res;
+    highp vec3 Group_002_VectorMath_001_Vector_res = Group_002_GroupInput_ViewDir_res * Group_002_GroupInput_Depth_res;
+    highp vec3 Group_002_VectorMath_Vector_res = Group_002_GroupInput_Cam_res + Group_002_VectorMath_001_Vector_res;
+    highp vec3 Group_001_Group_002_GroupInput_Vector_res = Group_002_VectorMath_Vector_res;
+    highp vec3 Group_Group_001_Group_002_GroupInput_Vector_res = Group_001_Group_002_GroupInput_Vector_res;
+    highp float Group_001_Group_002_ShaderData_Float_res = _time;
+    highp float Group_001_Group_002_Math_003_Value_res = Group_001_Group_002_ShaderData_Float_res * 0.333000004291534423828125;
+    highp float Group_001_Group_002_Math_015_Value_res = Group_001_Group_002_Math_003_Value_res + 2.7999999523162841796875;
+    highp float Group_001_Group_002_Math_001_Value_res = mod(Group_001_Group_002_Math_015_Value_res, 6.0);
+    highp float Group_001_Group_002_Math_019_Value_res = 3.0;
+    highp float Group_001_Group_002_Math_002_Value_res = Group_001_Group_002_Math_001_Value_res - Group_001_Group_002_Math_019_Value_res;
+    highp vec3 Group_001_Group_002_CombineXYZ_Vector_res = vec3(0.25, -0.1500000059604644775390625, Group_001_Group_002_Math_002_Value_res);
+    highp vec3 Group_Group_001_Group_002_GroupInput_Position_res = Group_001_Group_002_CombineXYZ_Vector_res;
+    highp vec3 Group_Group_001_Group_002_VectorMath_Vector_res = Group_Group_001_Group_002_GroupInput_Vector_res + Group_Group_001_Group_002_GroupInput_Position_res;
+    highp vec3 Group_Group_001_Group_002_GroupInput_Radius_res = vec3(0.25, 0.333000004291534423828125, 0.25);
+    highp vec3 Group_Group_001_Group_002_VectorMath_001_Vector_res = safe_divide(Group_Group_001_Group_002_VectorMath_Vector_res, Group_Group_001_Group_002_GroupInput_Radius_res);
+    highp float Group_Group_001_Group_002_VectorMath_003_Value_res = length(Group_Group_001_Group_002_VectorMath_001_Vector_res);
+    highp float Group_Group_001_Group_002_Math_001_Value_res = Group_Group_001_Group_002_VectorMath_003_Value_res - 1.0;
+    highp float Group_Group_001_Group_002_Math_002_Value_res = Group_Group_001_Group_002_Math_001_Value_res * Group_Group_001_Group_002_VectorMath_003_Value_res;
+    highp vec3 Group_Group_001_Group_002_VectorMath_004_Vector_res = Group_Group_001_Group_002_GroupInput_Radius_res * Group_Group_001_Group_002_GroupInput_Radius_res;
+    highp vec3 Group_Group_001_Group_002_VectorMath_005_Vector_res = safe_divide(Group_Group_001_Group_002_VectorMath_Vector_res, Group_Group_001_Group_002_VectorMath_004_Vector_res);
+    highp float Group_Group_001_Group_002_VectorMath_006_Value_res = length(Group_Group_001_Group_002_VectorMath_005_Vector_res);
+    highp float Group_Group_001_Group_002_Math_Value_res = Group_Group_001_Group_002_Math_002_Value_res / Group_Group_001_Group_002_VectorMath_006_Value_res;
+    highp float Group_001_Group_002_Group_Distance_res = Group_Group_001_Group_002_Math_Value_res;
+    highp vec3 Group_002_Group_001_Group_002_GroupInput_Vector_res = Group_001_Group_002_GroupInput_Vector_res;
+    highp float Group_001_Group_002_Math_008_Value_res = Group_001_Group_002_ShaderData_Float_res * (-0.45899999141693115234375);
+    highp float Group_001_Group_002_Math_017_Value_res = Group_001_Group_002_Math_008_Value_res + 1.7999999523162841796875;
+    highp float Group_001_Group_002_Math_007_Value_res = mod(Group_001_Group_002_Math_017_Value_res, 6.0);
+    highp float Group_001_Group_002_Math_006_Value_res = Group_001_Group_002_Math_007_Value_res - Group_001_Group_002_Math_019_Value_res;
+    highp vec3 Group_001_Group_002_CombineXYZ_001_Vector_res = vec3(0.1500000059604644775390625, -0.25, Group_001_Group_002_Math_006_Value_res);
+    highp vec3 Group_002_Group_001_Group_002_GroupInput_Position_res = Group_001_Group_002_CombineXYZ_001_Vector_res;
+    highp vec3 Group_002_Group_001_Group_002_VectorMath_Vector_res = Group_002_Group_001_Group_002_GroupInput_Vector_res + Group_002_Group_001_Group_002_GroupInput_Position_res;
+    highp vec3 Group_002_Group_001_Group_002_GroupInput_Radius_res = vec3(0.25, 0.1500000059604644775390625, 0.1500000059604644775390625);
+    highp vec3 Group_002_Group_001_Group_002_VectorMath_001_Vector_res = safe_divide(Group_002_Group_001_Group_002_VectorMath_Vector_res, Group_002_Group_001_Group_002_GroupInput_Radius_res);
+    highp float Group_002_Group_001_Group_002_VectorMath_003_Value_res = length(Group_002_Group_001_Group_002_VectorMath_001_Vector_res);
+    highp float Group_002_Group_001_Group_002_Math_001_Value_res = Group_002_Group_001_Group_002_VectorMath_003_Value_res - 1.0;
+    highp float Group_002_Group_001_Group_002_Math_002_Value_res = Group_002_Group_001_Group_002_Math_001_Value_res * Group_002_Group_001_Group_002_VectorMath_003_Value_res;
+    highp vec3 Group_002_Group_001_Group_002_VectorMath_004_Vector_res = Group_002_Group_001_Group_002_GroupInput_Radius_res * Group_002_Group_001_Group_002_GroupInput_Radius_res;
+    highp vec3 Group_002_Group_001_Group_002_VectorMath_005_Vector_res = safe_divide(Group_002_Group_001_Group_002_VectorMath_Vector_res, Group_002_Group_001_Group_002_VectorMath_004_Vector_res);
+    highp float Group_002_Group_001_Group_002_VectorMath_006_Value_res = length(Group_002_Group_001_Group_002_VectorMath_005_Vector_res);
+    highp float Group_002_Group_001_Group_002_Math_Value_res = Group_002_Group_001_Group_002_Math_002_Value_res / Group_002_Group_001_Group_002_VectorMath_006_Value_res;
+    highp float Group_001_Group_002_Group_002_Distance_res = Group_002_Group_001_Group_002_Math_Value_res;
+    highp float _1043;
+    if (true)
+    {
+        _1043 = min(Group_001_Group_002_Group_Distance_res, Group_001_Group_002_Group_002_Distance_res) - (((((max(0.7999999523162841796875 - abs(Group_001_Group_002_Group_Distance_res - Group_001_Group_002_Group_002_Distance_res), 0.0) / 0.7999999523162841796875) * (max(0.7999999523162841796875 - abs(Group_001_Group_002_Group_Distance_res - Group_001_Group_002_Group_002_Distance_res), 0.0) / 0.7999999523162841796875)) * (max(0.7999999523162841796875 - abs(Group_001_Group_002_Group_Distance_res - Group_001_Group_002_Group_002_Distance_res), 0.0) / 0.7999999523162841796875)) * 0.7999999523162841796875) * 0.16666667163372039794921875);
+    }
+    else
+    {
+        _1043 = min(Group_001_Group_002_Group_Distance_res, Group_001_Group_002_Group_002_Distance_res);
+    }
+    highp float Group_001_Group_002_Math_Value_res = _1043;
+    highp vec3 Group_003_Group_001_Group_002_GroupInput_Vector_res = Group_001_Group_002_GroupInput_Vector_res;
+    highp float Group_001_Group_002_Math_011_Value_res = Group_001_Group_002_ShaderData_Float_res * 0.5;
+    highp float Group_001_Group_002_Math_016_Value_res = Group_001_Group_002_Math_011_Value_res + 1.099999904632568359375;
+    highp float Group_001_Group_002_Math_010_Value_res = mod(Group_001_Group_002_Math_016_Value_res, 6.0);
+    highp float Group_001_Group_002_Math_009_Value_res = Group_001_Group_002_Math_010_Value_res - Group_001_Group_002_Math_019_Value_res;
+    highp vec3 Group_001_Group_002_CombineXYZ_002_Vector_res = vec3(-0.1500000059604644775390625, 0.25, Group_001_Group_002_Math_009_Value_res);
+    highp vec3 Group_003_Group_001_Group_002_GroupInput_Position_res = Group_001_Group_002_CombineXYZ_002_Vector_res;
+    highp vec3 Group_003_Group_001_Group_002_VectorMath_Vector_res = Group_003_Group_001_Group_002_GroupInput_Vector_res + Group_003_Group_001_Group_002_GroupInput_Position_res;
+    highp vec3 Group_003_Group_001_Group_002_GroupInput_Radius_res = vec3(0.300000011920928955078125, 0.12999999523162841796875, 0.20000000298023223876953125);
+    highp vec3 Group_003_Group_001_Group_002_VectorMath_001_Vector_res = safe_divide(Group_003_Group_001_Group_002_VectorMath_Vector_res, Group_003_Group_001_Group_002_GroupInput_Radius_res);
+    highp float Group_003_Group_001_Group_002_VectorMath_003_Value_res = length(Group_003_Group_001_Group_002_VectorMath_001_Vector_res);
+    highp float Group_003_Group_001_Group_002_Math_001_Value_res = Group_003_Group_001_Group_002_VectorMath_003_Value_res - 1.0;
+    highp float Group_003_Group_001_Group_002_Math_002_Value_res = Group_003_Group_001_Group_002_Math_001_Value_res * Group_003_Group_001_Group_002_VectorMath_003_Value_res;
+    highp vec3 Group_003_Group_001_Group_002_VectorMath_004_Vector_res = Group_003_Group_001_Group_002_GroupInput_Radius_res * Group_003_Group_001_Group_002_GroupInput_Radius_res;
+    highp vec3 Group_003_Group_001_Group_002_VectorMath_005_Vector_res = safe_divide(Group_003_Group_001_Group_002_VectorMath_Vector_res, Group_003_Group_001_Group_002_VectorMath_004_Vector_res);
+    highp float Group_003_Group_001_Group_002_VectorMath_006_Value_res = length(Group_003_Group_001_Group_002_VectorMath_005_Vector_res);
+    highp float Group_003_Group_001_Group_002_Math_Value_res = Group_003_Group_001_Group_002_Math_002_Value_res / Group_003_Group_001_Group_002_VectorMath_006_Value_res;
+    highp float Group_001_Group_002_Group_003_Distance_res = Group_003_Group_001_Group_002_Math_Value_res;
+    highp float _1137;
+    if (true)
+    {
+        _1137 = min(Group_001_Group_002_Math_Value_res, Group_001_Group_002_Group_003_Distance_res) - (((((max(0.5 - abs(Group_001_Group_002_Math_Value_res - Group_001_Group_002_Group_003_Distance_res), 0.0) / 0.5) * (max(0.5 - abs(Group_001_Group_002_Math_Value_res - Group_001_Group_002_Group_003_Distance_res), 0.0) / 0.5)) * (max(0.5 - abs(Group_001_Group_002_Math_Value_res - Group_001_Group_002_Group_003_Distance_res), 0.0) / 0.5)) * 0.5) * 0.16666667163372039794921875);
+    }
+    else
+    {
+        _1137 = min(Group_001_Group_002_Math_Value_res, Group_001_Group_002_Group_003_Distance_res);
+    }
+    highp float Group_001_Group_002_Math_004_Value_res = _1137;
+    highp vec3 Group_005_Group_001_Group_002_GroupInput_Vector_res = Group_001_Group_002_GroupInput_Vector_res;
+    highp float Group_001_Group_002_Math_014_Value_res = Group_001_Group_002_ShaderData_Float_res * (-0.3589999973773956298828125);
+    highp float Group_001_Group_002_Math_018_Value_res = Group_001_Group_002_Math_014_Value_res + 0.39999997615814208984375;
+    highp float Group_001_Group_002_Math_013_Value_res = mod(Group_001_Group_002_Math_018_Value_res, 6.0);
+    highp float Group_001_Group_002_Math_012_Value_res = Group_001_Group_002_Math_013_Value_res - Group_001_Group_002_Math_019_Value_res;
+    highp vec3 Group_001_Group_002_CombineXYZ_003_Vector_res = vec3(-0.25, 0.1500000059604644775390625, Group_001_Group_002_Math_012_Value_res);
+    highp vec3 Group_005_Group_001_Group_002_GroupInput_Position_res = Group_001_Group_002_CombineXYZ_003_Vector_res;
+    highp vec3 Group_005_Group_001_Group_002_VectorMath_Vector_res = Group_005_Group_001_Group_002_GroupInput_Vector_res + Group_005_Group_001_Group_002_GroupInput_Position_res;
+    highp vec3 Group_005_Group_001_Group_002_GroupInput_Radius_res = vec3(0.1500000059604644775390625, 0.300000011920928955078125, 0.25);
+    highp vec3 Group_005_Group_001_Group_002_VectorMath_001_Vector_res = safe_divide(Group_005_Group_001_Group_002_VectorMath_Vector_res, Group_005_Group_001_Group_002_GroupInput_Radius_res);
+    highp float Group_005_Group_001_Group_002_VectorMath_003_Value_res = length(Group_005_Group_001_Group_002_VectorMath_001_Vector_res);
+    highp float Group_005_Group_001_Group_002_Math_001_Value_res = Group_005_Group_001_Group_002_VectorMath_003_Value_res - 1.0;
+    highp float Group_005_Group_001_Group_002_Math_002_Value_res = Group_005_Group_001_Group_002_Math_001_Value_res * Group_005_Group_001_Group_002_VectorMath_003_Value_res;
+    highp vec3 Group_005_Group_001_Group_002_VectorMath_004_Vector_res = Group_005_Group_001_Group_002_GroupInput_Radius_res * Group_005_Group_001_Group_002_GroupInput_Radius_res;
+    highp vec3 Group_005_Group_001_Group_002_VectorMath_005_Vector_res = safe_divide(Group_005_Group_001_Group_002_VectorMath_Vector_res, Group_005_Group_001_Group_002_VectorMath_004_Vector_res);
+    highp float Group_005_Group_001_Group_002_VectorMath_006_Value_res = length(Group_005_Group_001_Group_002_VectorMath_005_Vector_res);
+    highp float Group_005_Group_001_Group_002_Math_Value_res = Group_005_Group_001_Group_002_Math_002_Value_res / Group_005_Group_001_Group_002_VectorMath_006_Value_res;
+    highp float Group_001_Group_002_Group_005_Distance_res = Group_005_Group_001_Group_002_Math_Value_res;
+    highp float _1231;
+    if (true)
+    {
+        _1231 = min(Group_001_Group_002_Math_004_Value_res, Group_001_Group_002_Group_005_Distance_res) - (((((max(0.4000000059604644775390625 - abs(Group_001_Group_002_Math_004_Value_res - Group_001_Group_002_Group_005_Distance_res), 0.0) / 0.4000000059604644775390625) * (max(0.4000000059604644775390625 - abs(Group_001_Group_002_Math_004_Value_res - Group_001_Group_002_Group_005_Distance_res), 0.0) / 0.4000000059604644775390625)) * (max(0.4000000059604644775390625 - abs(Group_001_Group_002_Math_004_Value_res - Group_001_Group_002_Group_005_Distance_res), 0.0) / 0.4000000059604644775390625)) * 0.4000000059604644775390625) * 0.16666667163372039794921875);
+    }
+    else
+    {
+        _1231 = min(Group_001_Group_002_Math_004_Value_res, Group_001_Group_002_Group_005_Distance_res);
+    }
+    highp float Group_001_Group_002_Math_005_Value_res = _1231;
+    highp float Group_002_Group_001_Distance_res = Group_001_Group_002_Math_005_Value_res;
+    highp float Group_002_Math_Value_res = Group_002_Group_001_Distance_res + Group_002_GroupInput_Depth_res;
+    highp float Group_002_Depth_res = Group_002_Math_Value_res;
+    highp float Group_003_GroupInput_Depth_res = Group_002_Depth_res;
+    highp vec3 Group_003_VectorMath_001_Vector_res = Group_003_GroupInput_ViewDir_res * Group_003_GroupInput_Depth_res;
+    highp vec3 Group_003_VectorMath_Vector_res = Group_003_GroupInput_Cam_res + Group_003_VectorMath_001_Vector_res;
+    highp vec3 Group_001_Group_003_GroupInput_Vector_res = Group_003_VectorMath_Vector_res;
+    highp vec3 Group_Group_001_Group_003_GroupInput_Vector_res = Group_001_Group_003_GroupInput_Vector_res;
+    highp float Group_001_Group_003_ShaderData_Float_res = _time;
+    highp float Group_001_Group_003_Math_003_Value_res = Group_001_Group_003_ShaderData_Float_res * 0.333000004291534423828125;
+    highp float Group_001_Group_003_Math_015_Value_res = Group_001_Group_003_Math_003_Value_res + 2.7999999523162841796875;
+    highp float Group_001_Group_003_Math_001_Value_res = mod(Group_001_Group_003_Math_015_Value_res, 6.0);
+    highp float Group_001_Group_003_Math_019_Value_res = 3.0;
+    highp float Group_001_Group_003_Math_002_Value_res = Group_001_Group_003_Math_001_Value_res - Group_001_Group_003_Math_019_Value_res;
+    highp vec3 Group_001_Group_003_CombineXYZ_Vector_res = vec3(0.25, -0.1500000059604644775390625, Group_001_Group_003_Math_002_Value_res);
+    highp vec3 Group_Group_001_Group_003_GroupInput_Position_res = Group_001_Group_003_CombineXYZ_Vector_res;
+    highp vec3 Group_Group_001_Group_003_VectorMath_Vector_res = Group_Group_001_Group_003_GroupInput_Vector_res + Group_Group_001_Group_003_GroupInput_Position_res;
+    highp vec3 Group_Group_001_Group_003_GroupInput_Radius_res = vec3(0.25, 0.333000004291534423828125, 0.25);
+    highp vec3 Group_Group_001_Group_003_VectorMath_001_Vector_res = safe_divide(Group_Group_001_Group_003_VectorMath_Vector_res, Group_Group_001_Group_003_GroupInput_Radius_res);
+    highp float Group_Group_001_Group_003_VectorMath_003_Value_res = length(Group_Group_001_Group_003_VectorMath_001_Vector_res);
+    highp float Group_Group_001_Group_003_Math_001_Value_res = Group_Group_001_Group_003_VectorMath_003_Value_res - 1.0;
+    highp float Group_Group_001_Group_003_Math_002_Value_res = Group_Group_001_Group_003_Math_001_Value_res * Group_Group_001_Group_003_VectorMath_003_Value_res;
+    highp vec3 Group_Group_001_Group_003_VectorMath_004_Vector_res = Group_Group_001_Group_003_GroupInput_Radius_res * Group_Group_001_Group_003_GroupInput_Radius_res;
+    highp vec3 Group_Group_001_Group_003_VectorMath_005_Vector_res = safe_divide(Group_Group_001_Group_003_VectorMath_Vector_res, Group_Group_001_Group_003_VectorMath_004_Vector_res);
+    highp float Group_Group_001_Group_003_VectorMath_006_Value_res = length(Group_Group_001_Group_003_VectorMath_005_Vector_res);
+    highp float Group_Group_001_Group_003_Math_Value_res = Group_Group_001_Group_003_Math_002_Value_res / Group_Group_001_Group_003_VectorMath_006_Value_res;
+    highp float Group_001_Group_003_Group_Distance_res = Group_Group_001_Group_003_Math_Value_res;
+    highp vec3 Group_002_Group_001_Group_003_GroupInput_Vector_res = Group_001_Group_003_GroupInput_Vector_res;
+    highp float Group_001_Group_003_Math_008_Value_res = Group_001_Group_003_ShaderData_Float_res * (-0.45899999141693115234375);
+    highp float Group_001_Group_003_Math_017_Value_res = Group_001_Group_003_Math_008_Value_res + 1.7999999523162841796875;
+    highp float Group_001_Group_003_Math_007_Value_res = mod(Group_001_Group_003_Math_017_Value_res, 6.0);
+    highp float Group_001_Group_003_Math_006_Value_res = Group_001_Group_003_Math_007_Value_res - Group_001_Group_003_Math_019_Value_res;
+    highp vec3 Group_001_Group_003_CombineXYZ_001_Vector_res = vec3(0.1500000059604644775390625, -0.25, Group_001_Group_003_Math_006_Value_res);
+    highp vec3 Group_002_Group_001_Group_003_GroupInput_Position_res = Group_001_Group_003_CombineXYZ_001_Vector_res;
+    highp vec3 Group_002_Group_001_Group_003_VectorMath_Vector_res = Group_002_Group_001_Group_003_GroupInput_Vector_res + Group_002_Group_001_Group_003_GroupInput_Position_res;
+    highp vec3 Group_002_Group_001_Group_003_GroupInput_Radius_res = vec3(0.25, 0.1500000059604644775390625, 0.1500000059604644775390625);
+    highp vec3 Group_002_Group_001_Group_003_VectorMath_001_Vector_res = safe_divide(Group_002_Group_001_Group_003_VectorMath_Vector_res, Group_002_Group_001_Group_003_GroupInput_Radius_res);
+    highp float Group_002_Group_001_Group_003_VectorMath_003_Value_res = length(Group_002_Group_001_Group_003_VectorMath_001_Vector_res);
+    highp float Group_002_Group_001_Group_003_Math_001_Value_res = Group_002_Group_001_Group_003_VectorMath_003_Value_res - 1.0;
+    highp float Group_002_Group_001_Group_003_Math_002_Value_res = Group_002_Group_001_Group_003_Math_001_Value_res * Group_002_Group_001_Group_003_VectorMath_003_Value_res;
+    highp vec3 Group_002_Group_001_Group_003_VectorMath_004_Vector_res = Group_002_Group_001_Group_003_GroupInput_Radius_res * Group_002_Group_001_Group_003_GroupInput_Radius_res;
+    highp vec3 Group_002_Group_001_Group_003_VectorMath_005_Vector_res = safe_divide(Group_002_Group_001_Group_003_VectorMath_Vector_res, Group_002_Group_001_Group_003_VectorMath_004_Vector_res);
+    highp float Group_002_Group_001_Group_003_VectorMath_006_Value_res = length(Group_002_Group_001_Group_003_VectorMath_005_Vector_res);
+    highp float Group_002_Group_001_Group_003_Math_Value_res = Group_002_Group_001_Group_003_Math_002_Value_res / Group_002_Group_001_Group_003_VectorMath_006_Value_res;
+    highp float Group_001_Group_003_Group_002_Distance_res = Group_002_Group_001_Group_003_Math_Value_res;
+    highp float _1404;
+    if (true)
+    {
+        _1404 = min(Group_001_Group_003_Group_Distance_res, Group_001_Group_003_Group_002_Distance_res) - (((((max(0.7999999523162841796875 - abs(Group_001_Group_003_Group_Distance_res - Group_001_Group_003_Group_002_Distance_res), 0.0) / 0.7999999523162841796875) * (max(0.7999999523162841796875 - abs(Group_001_Group_003_Group_Distance_res - Group_001_Group_003_Group_002_Distance_res), 0.0) / 0.7999999523162841796875)) * (max(0.7999999523162841796875 - abs(Group_001_Group_003_Group_Distance_res - Group_001_Group_003_Group_002_Distance_res), 0.0) / 0.7999999523162841796875)) * 0.7999999523162841796875) * 0.16666667163372039794921875);
+    }
+    else
+    {
+        _1404 = min(Group_001_Group_003_Group_Distance_res, Group_001_Group_003_Group_002_Distance_res);
+    }
+    highp float Group_001_Group_003_Math_Value_res = _1404;
+    highp vec3 Group_003_Group_001_Group_003_GroupInput_Vector_res = Group_001_Group_003_GroupInput_Vector_res;
+    highp float Group_001_Group_003_Math_011_Value_res = Group_001_Group_003_ShaderData_Float_res * 0.5;
+    highp float Group_001_Group_003_Math_016_Value_res = Group_001_Group_003_Math_011_Value_res + 1.099999904632568359375;
+    highp float Group_001_Group_003_Math_010_Value_res = mod(Group_001_Group_003_Math_016_Value_res, 6.0);
+    highp float Group_001_Group_003_Math_009_Value_res = Group_001_Group_003_Math_010_Value_res - Group_001_Group_003_Math_019_Value_res;
+    highp vec3 Group_001_Group_003_CombineXYZ_002_Vector_res = vec3(-0.1500000059604644775390625, 0.25, Group_001_Group_003_Math_009_Value_res);
+    highp vec3 Group_003_Group_001_Group_003_GroupInput_Position_res = Group_001_Group_003_CombineXYZ_002_Vector_res;
+    highp vec3 Group_003_Group_001_Group_003_VectorMath_Vector_res = Group_003_Group_001_Group_003_GroupInput_Vector_res + Group_003_Group_001_Group_003_GroupInput_Position_res;
+    highp vec3 Group_003_Group_001_Group_003_GroupInput_Radius_res = vec3(0.300000011920928955078125, 0.12999999523162841796875, 0.20000000298023223876953125);
+    highp vec3 Group_003_Group_001_Group_003_VectorMath_001_Vector_res = safe_divide(Group_003_Group_001_Group_003_VectorMath_Vector_res, Group_003_Group_001_Group_003_GroupInput_Radius_res);
+    highp float Group_003_Group_001_Group_003_VectorMath_003_Value_res = length(Group_003_Group_001_Group_003_VectorMath_001_Vector_res);
+    highp float Group_003_Group_001_Group_003_Math_001_Value_res = Group_003_Group_001_Group_003_VectorMath_003_Value_res - 1.0;
+    highp float Group_003_Group_001_Group_003_Math_002_Value_res = Group_003_Group_001_Group_003_Math_001_Value_res * Group_003_Group_001_Group_003_VectorMath_003_Value_res;
+    highp vec3 Group_003_Group_001_Group_003_VectorMath_004_Vector_res = Group_003_Group_001_Group_003_GroupInput_Radius_res * Group_003_Group_001_Group_003_GroupInput_Radius_res;
+    highp vec3 Group_003_Group_001_Group_003_VectorMath_005_Vector_res = safe_divide(Group_003_Group_001_Group_003_VectorMath_Vector_res, Group_003_Group_001_Group_003_VectorMath_004_Vector_res);
+    highp float Group_003_Group_001_Group_003_VectorMath_006_Value_res = length(Group_003_Group_001_Group_003_VectorMath_005_Vector_res);
+    highp float Group_003_Group_001_Group_003_Math_Value_res = Group_003_Group_001_Group_003_Math_002_Value_res / Group_003_Group_001_Group_003_VectorMath_006_Value_res;
+    highp float Group_001_Group_003_Group_003_Distance_res = Group_003_Group_001_Group_003_Math_Value_res;
+    highp float _1498;
+    if (true)
+    {
+        _1498 = min(Group_001_Group_003_Math_Value_res, Group_001_Group_003_Group_003_Distance_res) - (((((max(0.5 - abs(Group_001_Group_003_Math_Value_res - Group_001_Group_003_Group_003_Distance_res), 0.0) / 0.5) * (max(0.5 - abs(Group_001_Group_003_Math_Value_res - Group_001_Group_003_Group_003_Distance_res), 0.0) / 0.5)) * (max(0.5 - abs(Group_001_Group_003_Math_Value_res - Group_001_Group_003_Group_003_Distance_res), 0.0) / 0.5)) * 0.5) * 0.16666667163372039794921875);
+    }
+    else
+    {
+        _1498 = min(Group_001_Group_003_Math_Value_res, Group_001_Group_003_Group_003_Distance_res);
+    }
+    highp float Group_001_Group_003_Math_004_Value_res = _1498;
+    highp vec3 Group_005_Group_001_Group_003_GroupInput_Vector_res = Group_001_Group_003_GroupInput_Vector_res;
+    highp float Group_001_Group_003_Math_014_Value_res = Group_001_Group_003_ShaderData_Float_res * (-0.3589999973773956298828125);
+    highp float Group_001_Group_003_Math_018_Value_res = Group_001_Group_003_Math_014_Value_res + 0.39999997615814208984375;
+    highp float Group_001_Group_003_Math_013_Value_res = mod(Group_001_Group_003_Math_018_Value_res, 6.0);
+    highp float Group_001_Group_003_Math_012_Value_res = Group_001_Group_003_Math_013_Value_res - Group_001_Group_003_Math_019_Value_res;
+    highp vec3 Group_001_Group_003_CombineXYZ_003_Vector_res = vec3(-0.25, 0.1500000059604644775390625, Group_001_Group_003_Math_012_Value_res);
+    highp vec3 Group_005_Group_001_Group_003_GroupInput_Position_res = Group_001_Group_003_CombineXYZ_003_Vector_res;
+    highp vec3 Group_005_Group_001_Group_003_VectorMath_Vector_res = Group_005_Group_001_Group_003_GroupInput_Vector_res + Group_005_Group_001_Group_003_GroupInput_Position_res;
+    highp vec3 Group_005_Group_001_Group_003_GroupInput_Radius_res = vec3(0.1500000059604644775390625, 0.300000011920928955078125, 0.25);
+    highp vec3 Group_005_Group_001_Group_003_VectorMath_001_Vector_res = safe_divide(Group_005_Group_001_Group_003_VectorMath_Vector_res, Group_005_Group_001_Group_003_GroupInput_Radius_res);
+    highp float Group_005_Group_001_Group_003_VectorMath_003_Value_res = length(Group_005_Group_001_Group_003_VectorMath_001_Vector_res);
+    highp float Group_005_Group_001_Group_003_Math_001_Value_res = Group_005_Group_001_Group_003_VectorMath_003_Value_res - 1.0;
+    highp float Group_005_Group_001_Group_003_Math_002_Value_res = Group_005_Group_001_Group_003_Math_001_Value_res * Group_005_Group_001_Group_003_VectorMath_003_Value_res;
+    highp vec3 Group_005_Group_001_Group_003_VectorMath_004_Vector_res = Group_005_Group_001_Group_003_GroupInput_Radius_res * Group_005_Group_001_Group_003_GroupInput_Radius_res;
+    highp vec3 Group_005_Group_001_Group_003_VectorMath_005_Vector_res = safe_divide(Group_005_Group_001_Group_003_VectorMath_Vector_res, Group_005_Group_001_Group_003_VectorMath_004_Vector_res);
+    highp float Group_005_Group_001_Group_003_VectorMath_006_Value_res = length(Group_005_Group_001_Group_003_VectorMath_005_Vector_res);
+    highp float Group_005_Group_001_Group_003_Math_Value_res = Group_005_Group_001_Group_003_Math_002_Value_res / Group_005_Group_001_Group_003_VectorMath_006_Value_res;
+    highp float Group_001_Group_003_Group_005_Distance_res = Group_005_Group_001_Group_003_Math_Value_res;
+    highp float _1592;
+    if (true)
+    {
+        _1592 = min(Group_001_Group_003_Math_004_Value_res, Group_001_Group_003_Group_005_Distance_res) - (((((max(0.4000000059604644775390625 - abs(Group_001_Group_003_Math_004_Value_res - Group_001_Group_003_Group_005_Distance_res), 0.0) / 0.4000000059604644775390625) * (max(0.4000000059604644775390625 - abs(Group_001_Group_003_Math_004_Value_res - Group_001_Group_003_Group_005_Distance_res), 0.0) / 0.4000000059604644775390625)) * (max(0.4000000059604644775390625 - abs(Group_001_Group_003_Math_004_Value_res - Group_001_Group_003_Group_005_Distance_res), 0.0) / 0.4000000059604644775390625)) * 0.4000000059604644775390625) * 0.16666667163372039794921875);
+    }
+    else
+    {
+        _1592 = min(Group_001_Group_003_Math_004_Value_res, Group_001_Group_003_Group_005_Distance_res);
+    }
+    highp float Group_001_Group_003_Math_005_Value_res = _1592;
+    highp float Group_003_Group_001_Distance_res = Group_001_Group_003_Math_005_Value_res;
+    highp float Group_003_Math_Value_res = Group_003_Group_001_Distance_res + Group_003_GroupInput_Depth_res;
+    highp float Group_003_Depth_res = Group_003_Math_Value_res;
+    highp float Group_004_GroupInput_Depth_res = Group_003_Depth_res;
+    highp vec3 Group_004_VectorMath_001_Vector_res = Group_004_GroupInput_ViewDir_res * Group_004_GroupInput_Depth_res;
+    highp vec3 Group_004_VectorMath_Vector_res = Group_004_GroupInput_Cam_res + Group_004_VectorMath_001_Vector_res;
+    highp vec3 Group_001_Group_004_GroupInput_Vector_res = Group_004_VectorMath_Vector_res;
+    highp vec3 Group_Group_001_Group_004_GroupInput_Vector_res = Group_001_Group_004_GroupInput_Vector_res;
+    highp float Group_001_Group_004_ShaderData_Float_res = _time;
+    highp float Group_001_Group_004_Math_003_Value_res = Group_001_Group_004_ShaderData_Float_res * 0.333000004291534423828125;
+    highp float Group_001_Group_004_Math_015_Value_res = Group_001_Group_004_Math_003_Value_res + 2.7999999523162841796875;
+    highp float Group_001_Group_004_Math_001_Value_res = mod(Group_001_Group_004_Math_015_Value_res, 6.0);
+    highp float Group_001_Group_004_Math_019_Value_res = 3.0;
+    highp float Group_001_Group_004_Math_002_Value_res = Group_001_Group_004_Math_001_Value_res - Group_001_Group_004_Math_019_Value_res;
+    highp vec3 Group_001_Group_004_CombineXYZ_Vector_res = vec3(0.25, -0.1500000059604644775390625, Group_001_Group_004_Math_002_Value_res);
+    highp vec3 Group_Group_001_Group_004_GroupInput_Position_res = Group_001_Group_004_CombineXYZ_Vector_res;
+    highp vec3 Group_Group_001_Group_004_VectorMath_Vector_res = Group_Group_001_Group_004_GroupInput_Vector_res + Group_Group_001_Group_004_GroupInput_Position_res;
+    highp vec3 Group_Group_001_Group_004_GroupInput_Radius_res = vec3(0.25, 0.333000004291534423828125, 0.25);
+    highp vec3 Group_Group_001_Group_004_VectorMath_001_Vector_res = safe_divide(Group_Group_001_Group_004_VectorMath_Vector_res, Group_Group_001_Group_004_GroupInput_Radius_res);
+    highp float Group_Group_001_Group_004_VectorMath_003_Value_res = length(Group_Group_001_Group_004_VectorMath_001_Vector_res);
+    highp float Group_Group_001_Group_004_Math_001_Value_res = Group_Group_001_Group_004_VectorMath_003_Value_res - 1.0;
+    highp float Group_Group_001_Group_004_Math_002_Value_res = Group_Group_001_Group_004_Math_001_Value_res * Group_Group_001_Group_004_VectorMath_003_Value_res;
+    highp vec3 Group_Group_001_Group_004_VectorMath_004_Vector_res = Group_Group_001_Group_004_GroupInput_Radius_res * Group_Group_001_Group_004_GroupInput_Radius_res;
+    highp vec3 Group_Group_001_Group_004_VectorMath_005_Vector_res = safe_divide(Group_Group_001_Group_004_VectorMath_Vector_res, Group_Group_001_Group_004_VectorMath_004_Vector_res);
+    highp float Group_Group_001_Group_004_VectorMath_006_Value_res = length(Group_Group_001_Group_004_VectorMath_005_Vector_res);
+    highp float Group_Group_001_Group_004_Math_Value_res = Group_Group_001_Group_004_Math_002_Value_res / Group_Group_001_Group_004_VectorMath_006_Value_res;
+    highp float Group_001_Group_004_Group_Distance_res = Group_Group_001_Group_004_Math_Value_res;
+    highp vec3 Group_002_Group_001_Group_004_GroupInput_Vector_res = Group_001_Group_004_GroupInput_Vector_res;
+    highp float Group_001_Group_004_Math_008_Value_res = Group_001_Group_004_ShaderData_Float_res * (-0.45899999141693115234375);
+    highp float Group_001_Group_004_Math_017_Value_res = Group_001_Group_004_Math_008_Value_res + 1.7999999523162841796875;
+    highp float Group_001_Group_004_Math_007_Value_res = mod(Group_001_Group_004_Math_017_Value_res, 6.0);
+    highp float Group_001_Group_004_Math_006_Value_res = Group_001_Group_004_Math_007_Value_res - Group_001_Group_004_Math_019_Value_res;
+    highp vec3 Group_001_Group_004_CombineXYZ_001_Vector_res = vec3(0.1500000059604644775390625, -0.25, Group_001_Group_004_Math_006_Value_res);
+    highp vec3 Group_002_Group_001_Group_004_GroupInput_Position_res = Group_001_Group_004_CombineXYZ_001_Vector_res;
+    highp vec3 Group_002_Group_001_Group_004_VectorMath_Vector_res = Group_002_Group_001_Group_004_GroupInput_Vector_res + Group_002_Group_001_Group_004_GroupInput_Position_res;
+    highp vec3 Group_002_Group_001_Group_004_GroupInput_Radius_res = vec3(0.25, 0.1500000059604644775390625, 0.1500000059604644775390625);
+    highp vec3 Group_002_Group_001_Group_004_VectorMath_001_Vector_res = safe_divide(Group_002_Group_001_Group_004_VectorMath_Vector_res, Group_002_Group_001_Group_004_GroupInput_Radius_res);
+    highp float Group_002_Group_001_Group_004_VectorMath_003_Value_res = length(Group_002_Group_001_Group_004_VectorMath_001_Vector_res);
+    highp float Group_002_Group_001_Group_004_Math_001_Value_res = Group_002_Group_001_Group_004_VectorMath_003_Value_res - 1.0;
+    highp float Group_002_Group_001_Group_004_Math_002_Value_res = Group_002_Group_001_Group_004_Math_001_Value_res * Group_002_Group_001_Group_004_VectorMath_003_Value_res;
+    highp vec3 Group_002_Group_001_Group_004_VectorMath_004_Vector_res = Group_002_Group_001_Group_004_GroupInput_Radius_res * Group_002_Group_001_Group_004_GroupInput_Radius_res;
+    highp vec3 Group_002_Group_001_Group_004_VectorMath_005_Vector_res = safe_divide(Group_002_Group_001_Group_004_VectorMath_Vector_res, Group_002_Group_001_Group_004_VectorMath_004_Vector_res);
+    highp float Group_002_Group_001_Group_004_VectorMath_006_Value_res = length(Group_002_Group_001_Group_004_VectorMath_005_Vector_res);
+    highp float Group_002_Group_001_Group_004_Math_Value_res = Group_002_Group_001_Group_004_Math_002_Value_res / Group_002_Group_001_Group_004_VectorMath_006_Value_res;
+    highp float Group_001_Group_004_Group_002_Distance_res = Group_002_Group_001_Group_004_Math_Value_res;
+    highp float _1765;
+    if (true)
+    {
+        _1765 = min(Group_001_Group_004_Group_Distance_res, Group_001_Group_004_Group_002_Distance_res) - (((((max(0.7999999523162841796875 - abs(Group_001_Group_004_Group_Distance_res - Group_001_Group_004_Group_002_Distance_res), 0.0) / 0.7999999523162841796875) * (max(0.7999999523162841796875 - abs(Group_001_Group_004_Group_Distance_res - Group_001_Group_004_Group_002_Distance_res), 0.0) / 0.7999999523162841796875)) * (max(0.7999999523162841796875 - abs(Group_001_Group_004_Group_Distance_res - Group_001_Group_004_Group_002_Distance_res), 0.0) / 0.7999999523162841796875)) * 0.7999999523162841796875) * 0.16666667163372039794921875);
+    }
+    else
+    {
+        _1765 = min(Group_001_Group_004_Group_Distance_res, Group_001_Group_004_Group_002_Distance_res);
+    }
+    highp float Group_001_Group_004_Math_Value_res = _1765;
+    highp vec3 Group_003_Group_001_Group_004_GroupInput_Vector_res = Group_001_Group_004_GroupInput_Vector_res;
+    highp float Group_001_Group_004_Math_011_Value_res = Group_001_Group_004_ShaderData_Float_res * 0.5;
+    highp float Group_001_Group_004_Math_016_Value_res = Group_001_Group_004_Math_011_Value_res + 1.099999904632568359375;
+    highp float Group_001_Group_004_Math_010_Value_res = mod(Group_001_Group_004_Math_016_Value_res, 6.0);
+    highp float Group_001_Group_004_Math_009_Value_res = Group_001_Group_004_Math_010_Value_res - Group_001_Group_004_Math_019_Value_res;
+    highp vec3 Group_001_Group_004_CombineXYZ_002_Vector_res = vec3(-0.1500000059604644775390625, 0.25, Group_001_Group_004_Math_009_Value_res);
+    highp vec3 Group_003_Group_001_Group_004_GroupInput_Position_res = Group_001_Group_004_CombineXYZ_002_Vector_res;
+    highp vec3 Group_003_Group_001_Group_004_VectorMath_Vector_res = Group_003_Group_001_Group_004_GroupInput_Vector_res + Group_003_Group_001_Group_004_GroupInput_Position_res;
+    highp vec3 Group_003_Group_001_Group_004_GroupInput_Radius_res = vec3(0.300000011920928955078125, 0.12999999523162841796875, 0.20000000298023223876953125);
+    highp vec3 Group_003_Group_001_Group_004_VectorMath_001_Vector_res = safe_divide(Group_003_Group_001_Group_004_VectorMath_Vector_res, Group_003_Group_001_Group_004_GroupInput_Radius_res);
+    highp float Group_003_Group_001_Group_004_VectorMath_003_Value_res = length(Group_003_Group_001_Group_004_VectorMath_001_Vector_res);
+    highp float Group_003_Group_001_Group_004_Math_001_Value_res = Group_003_Group_001_Group_004_VectorMath_003_Value_res - 1.0;
+    highp float Group_003_Group_001_Group_004_Math_002_Value_res = Group_003_Group_001_Group_004_Math_001_Value_res * Group_003_Group_001_Group_004_VectorMath_003_Value_res;
+    highp vec3 Group_003_Group_001_Group_004_VectorMath_004_Vector_res = Group_003_Group_001_Group_004_GroupInput_Radius_res * Group_003_Group_001_Group_004_GroupInput_Radius_res;
+    highp vec3 Group_003_Group_001_Group_004_VectorMath_005_Vector_res = safe_divide(Group_003_Group_001_Group_004_VectorMath_Vector_res, Group_003_Group_001_Group_004_VectorMath_004_Vector_res);
+    highp float Group_003_Group_001_Group_004_VectorMath_006_Value_res = length(Group_003_Group_001_Group_004_VectorMath_005_Vector_res);
+    highp float Group_003_Group_001_Group_004_Math_Value_res = Group_003_Group_001_Group_004_Math_002_Value_res / Group_003_Group_001_Group_004_VectorMath_006_Value_res;
+    highp float Group_001_Group_004_Group_003_Distance_res = Group_003_Group_001_Group_004_Math_Value_res;
+    highp float _1859;
+    if (true)
+    {
+        _1859 = min(Group_001_Group_004_Math_Value_res, Group_001_Group_004_Group_003_Distance_res) - (((((max(0.5 - abs(Group_001_Group_004_Math_Value_res - Group_001_Group_004_Group_003_Distance_res), 0.0) / 0.5) * (max(0.5 - abs(Group_001_Group_004_Math_Value_res - Group_001_Group_004_Group_003_Distance_res), 0.0) / 0.5)) * (max(0.5 - abs(Group_001_Group_004_Math_Value_res - Group_001_Group_004_Group_003_Distance_res), 0.0) / 0.5)) * 0.5) * 0.16666667163372039794921875);
+    }
+    else
+    {
+        _1859 = min(Group_001_Group_004_Math_Value_res, Group_001_Group_004_Group_003_Distance_res);
+    }
+    highp float Group_001_Group_004_Math_004_Value_res = _1859;
+    highp vec3 Group_005_Group_001_Group_004_GroupInput_Vector_res = Group_001_Group_004_GroupInput_Vector_res;
+    highp float Group_001_Group_004_Math_014_Value_res = Group_001_Group_004_ShaderData_Float_res * (-0.3589999973773956298828125);
+    highp float Group_001_Group_004_Math_018_Value_res = Group_001_Group_004_Math_014_Value_res + 0.39999997615814208984375;
+    highp float Group_001_Group_004_Math_013_Value_res = mod(Group_001_Group_004_Math_018_Value_res, 6.0);
+    highp float Group_001_Group_004_Math_012_Value_res = Group_001_Group_004_Math_013_Value_res - Group_001_Group_004_Math_019_Value_res;
+    highp vec3 Group_001_Group_004_CombineXYZ_003_Vector_res = vec3(-0.25, 0.1500000059604644775390625, Group_001_Group_004_Math_012_Value_res);
+    highp vec3 Group_005_Group_001_Group_004_GroupInput_Position_res = Group_001_Group_004_CombineXYZ_003_Vector_res;
+    highp vec3 Group_005_Group_001_Group_004_VectorMath_Vector_res = Group_005_Group_001_Group_004_GroupInput_Vector_res + Group_005_Group_001_Group_004_GroupInput_Position_res;
+    highp vec3 Group_005_Group_001_Group_004_GroupInput_Radius_res = vec3(0.1500000059604644775390625, 0.300000011920928955078125, 0.25);
+    highp vec3 Group_005_Group_001_Group_004_VectorMath_001_Vector_res = safe_divide(Group_005_Group_001_Group_004_VectorMath_Vector_res, Group_005_Group_001_Group_004_GroupInput_Radius_res);
+    highp float Group_005_Group_001_Group_004_VectorMath_003_Value_res = length(Group_005_Group_001_Group_004_VectorMath_001_Vector_res);
+    highp float Group_005_Group_001_Group_004_Math_001_Value_res = Group_005_Group_001_Group_004_VectorMath_003_Value_res - 1.0;
+    highp float Group_005_Group_001_Group_004_Math_002_Value_res = Group_005_Group_001_Group_004_Math_001_Value_res * Group_005_Group_001_Group_004_VectorMath_003_Value_res;
+    highp vec3 Group_005_Group_001_Group_004_VectorMath_004_Vector_res = Group_005_Group_001_Group_004_GroupInput_Radius_res * Group_005_Group_001_Group_004_GroupInput_Radius_res;
+    highp vec3 Group_005_Group_001_Group_004_VectorMath_005_Vector_res = safe_divide(Group_005_Group_001_Group_004_VectorMath_Vector_res, Group_005_Group_001_Group_004_VectorMath_004_Vector_res);
+    highp float Group_005_Group_001_Group_004_VectorMath_006_Value_res = length(Group_005_Group_001_Group_004_VectorMath_005_Vector_res);
+    highp float Group_005_Group_001_Group_004_Math_Value_res = Group_005_Group_001_Group_004_Math_002_Value_res / Group_005_Group_001_Group_004_VectorMath_006_Value_res;
+    highp float Group_001_Group_004_Group_005_Distance_res = Group_005_Group_001_Group_004_Math_Value_res;
+    highp float _1953;
+    if (true)
+    {
+        _1953 = min(Group_001_Group_004_Math_004_Value_res, Group_001_Group_004_Group_005_Distance_res) - (((((max(0.4000000059604644775390625 - abs(Group_001_Group_004_Math_004_Value_res - Group_001_Group_004_Group_005_Distance_res), 0.0) / 0.4000000059604644775390625) * (max(0.4000000059604644775390625 - abs(Group_001_Group_004_Math_004_Value_res - Group_001_Group_004_Group_005_Distance_res), 0.0) / 0.4000000059604644775390625)) * (max(0.4000000059604644775390625 - abs(Group_001_Group_004_Math_004_Value_res - Group_001_Group_004_Group_005_Distance_res), 0.0) / 0.4000000059604644775390625)) * 0.4000000059604644775390625) * 0.16666667163372039794921875);
+    }
+    else
+    {
+        _1953 = min(Group_001_Group_004_Math_004_Value_res, Group_001_Group_004_Group_005_Distance_res);
+    }
+    highp float Group_001_Group_004_Math_005_Value_res = _1953;
+    highp float Group_004_Group_001_Distance_res = Group_001_Group_004_Math_005_Value_res;
+    highp float Group_004_Math_Value_res = Group_004_Group_001_Distance_res + Group_004_GroupInput_Depth_res;
+    highp float Group_004_Depth_res = Group_004_Math_Value_res;
+    highp float Group_007_GroupInput_Depth_res = Group_004_Depth_res;
+    highp vec3 Group_007_VectorMath_001_Vector_res = Group_007_GroupInput_ViewDir_res * Group_007_GroupInput_Depth_res;
+    highp vec3 Group_007_VectorMath_Vector_res = Group_007_GroupInput_Cam_res + Group_007_VectorMath_001_Vector_res;
+    highp vec3 Group_001_Group_007_GroupInput_Vector_res = Group_007_VectorMath_Vector_res;
+    highp vec3 Group_Group_001_Group_007_GroupInput_Vector_res = Group_001_Group_007_GroupInput_Vector_res;
+    highp float Group_001_Group_007_ShaderData_Float_res = _time;
+    highp float Group_001_Group_007_Math_003_Value_res = Group_001_Group_007_ShaderData_Float_res * 0.333000004291534423828125;
+    highp float Group_001_Group_007_Math_015_Value_res = Group_001_Group_007_Math_003_Value_res + 2.7999999523162841796875;
+    highp float Group_001_Group_007_Math_001_Value_res = mod(Group_001_Group_007_Math_015_Value_res, 6.0);
+    highp float Group_001_Group_007_Math_019_Value_res = 3.0;
+    highp float Group_001_Group_007_Math_002_Value_res = Group_001_Group_007_Math_001_Value_res - Group_001_Group_007_Math_019_Value_res;
+    highp vec3 Group_001_Group_007_CombineXYZ_Vector_res = vec3(0.25, -0.1500000059604644775390625, Group_001_Group_007_Math_002_Value_res);
+    highp vec3 Group_Group_001_Group_007_GroupInput_Position_res = Group_001_Group_007_CombineXYZ_Vector_res;
+    highp vec3 Group_Group_001_Group_007_VectorMath_Vector_res = Group_Group_001_Group_007_GroupInput_Vector_res + Group_Group_001_Group_007_GroupInput_Position_res;
+    highp vec3 Group_Group_001_Group_007_GroupInput_Radius_res = vec3(0.25, 0.333000004291534423828125, 0.25);
+    highp vec3 Group_Group_001_Group_007_VectorMath_001_Vector_res = safe_divide(Group_Group_001_Group_007_VectorMath_Vector_res, Group_Group_001_Group_007_GroupInput_Radius_res);
+    highp float Group_Group_001_Group_007_VectorMath_003_Value_res = length(Group_Group_001_Group_007_VectorMath_001_Vector_res);
+    highp float Group_Group_001_Group_007_Math_001_Value_res = Group_Group_001_Group_007_VectorMath_003_Value_res - 1.0;
+    highp float Group_Group_001_Group_007_Math_002_Value_res = Group_Group_001_Group_007_Math_001_Value_res * Group_Group_001_Group_007_VectorMath_003_Value_res;
+    highp vec3 Group_Group_001_Group_007_VectorMath_004_Vector_res = Group_Group_001_Group_007_GroupInput_Radius_res * Group_Group_001_Group_007_GroupInput_Radius_res;
+    highp vec3 Group_Group_001_Group_007_VectorMath_005_Vector_res = safe_divide(Group_Group_001_Group_007_VectorMath_Vector_res, Group_Group_001_Group_007_VectorMath_004_Vector_res);
+    highp float Group_Group_001_Group_007_VectorMath_006_Value_res = length(Group_Group_001_Group_007_VectorMath_005_Vector_res);
+    highp float Group_Group_001_Group_007_Math_Value_res = Group_Group_001_Group_007_Math_002_Value_res / Group_Group_001_Group_007_VectorMath_006_Value_res;
+    highp float Group_001_Group_007_Group_Distance_res = Group_Group_001_Group_007_Math_Value_res;
+    highp vec3 Group_002_Group_001_Group_007_GroupInput_Vector_res = Group_001_Group_007_GroupInput_Vector_res;
+    highp float Group_001_Group_007_Math_008_Value_res = Group_001_Group_007_ShaderData_Float_res * (-0.45899999141693115234375);
+    highp float Group_001_Group_007_Math_017_Value_res = Group_001_Group_007_Math_008_Value_res + 1.7999999523162841796875;
+    highp float Group_001_Group_007_Math_007_Value_res = mod(Group_001_Group_007_Math_017_Value_res, 6.0);
+    highp float Group_001_Group_007_Math_006_Value_res = Group_001_Group_007_Math_007_Value_res - Group_001_Group_007_Math_019_Value_res;
+    highp vec3 Group_001_Group_007_CombineXYZ_001_Vector_res = vec3(0.1500000059604644775390625, -0.25, Group_001_Group_007_Math_006_Value_res);
+    highp vec3 Group_002_Group_001_Group_007_GroupInput_Position_res = Group_001_Group_007_CombineXYZ_001_Vector_res;
+    highp vec3 Group_002_Group_001_Group_007_VectorMath_Vector_res = Group_002_Group_001_Group_007_GroupInput_Vector_res + Group_002_Group_001_Group_007_GroupInput_Position_res;
+    highp vec3 Group_002_Group_001_Group_007_GroupInput_Radius_res = vec3(0.25, 0.1500000059604644775390625, 0.1500000059604644775390625);
+    highp vec3 Group_002_Group_001_Group_007_VectorMath_001_Vector_res = safe_divide(Group_002_Group_001_Group_007_VectorMath_Vector_res, Group_002_Group_001_Group_007_GroupInput_Radius_res);
+    highp float Group_002_Group_001_Group_007_VectorMath_003_Value_res = length(Group_002_Group_001_Group_007_VectorMath_001_Vector_res);
+    highp float Group_002_Group_001_Group_007_Math_001_Value_res = Group_002_Group_001_Group_007_VectorMath_003_Value_res - 1.0;
+    highp float Group_002_Group_001_Group_007_Math_002_Value_res = Group_002_Group_001_Group_007_Math_001_Value_res * Group_002_Group_001_Group_007_VectorMath_003_Value_res;
+    highp vec3 Group_002_Group_001_Group_007_VectorMath_004_Vector_res = Group_002_Group_001_Group_007_GroupInput_Radius_res * Group_002_Group_001_Group_007_GroupInput_Radius_res;
+    highp vec3 Group_002_Group_001_Group_007_VectorMath_005_Vector_res = safe_divide(Group_002_Group_001_Group_007_VectorMath_Vector_res, Group_002_Group_001_Group_007_VectorMath_004_Vector_res);
+    highp float Group_002_Group_001_Group_007_VectorMath_006_Value_res = length(Group_002_Group_001_Group_007_VectorMath_005_Vector_res);
+    highp float Group_002_Group_001_Group_007_Math_Value_res = Group_002_Group_001_Group_007_Math_002_Value_res / Group_002_Group_001_Group_007_VectorMath_006_Value_res;
+    highp float Group_001_Group_007_Group_002_Distance_res = Group_002_Group_001_Group_007_Math_Value_res;
+    highp float _2126;
+    if (true)
+    {
+        _2126 = min(Group_001_Group_007_Group_Distance_res, Group_001_Group_007_Group_002_Distance_res) - (((((max(0.7999999523162841796875 - abs(Group_001_Group_007_Group_Distance_res - Group_001_Group_007_Group_002_Distance_res), 0.0) / 0.7999999523162841796875) * (max(0.7999999523162841796875 - abs(Group_001_Group_007_Group_Distance_res - Group_001_Group_007_Group_002_Distance_res), 0.0) / 0.7999999523162841796875)) * (max(0.7999999523162841796875 - abs(Group_001_Group_007_Group_Distance_res - Group_001_Group_007_Group_002_Distance_res), 0.0) / 0.7999999523162841796875)) * 0.7999999523162841796875) * 0.16666667163372039794921875);
+    }
+    else
+    {
+        _2126 = min(Group_001_Group_007_Group_Distance_res, Group_001_Group_007_Group_002_Distance_res);
+    }
+    highp float Group_001_Group_007_Math_Value_res = _2126;
+    highp vec3 Group_003_Group_001_Group_007_GroupInput_Vector_res = Group_001_Group_007_GroupInput_Vector_res;
+    highp float Group_001_Group_007_Math_011_Value_res = Group_001_Group_007_ShaderData_Float_res * 0.5;
+    highp float Group_001_Group_007_Math_016_Value_res = Group_001_Group_007_Math_011_Value_res + 1.099999904632568359375;
+    highp float Group_001_Group_007_Math_010_Value_res = mod(Group_001_Group_007_Math_016_Value_res, 6.0);
+    highp float Group_001_Group_007_Math_009_Value_res = Group_001_Group_007_Math_010_Value_res - Group_001_Group_007_Math_019_Value_res;
+    highp vec3 Group_001_Group_007_CombineXYZ_002_Vector_res = vec3(-0.1500000059604644775390625, 0.25, Group_001_Group_007_Math_009_Value_res);
+    highp vec3 Group_003_Group_001_Group_007_GroupInput_Position_res = Group_001_Group_007_CombineXYZ_002_Vector_res;
+    highp vec3 Group_003_Group_001_Group_007_VectorMath_Vector_res = Group_003_Group_001_Group_007_GroupInput_Vector_res + Group_003_Group_001_Group_007_GroupInput_Position_res;
+    highp vec3 Group_003_Group_001_Group_007_GroupInput_Radius_res = vec3(0.300000011920928955078125, 0.12999999523162841796875, 0.20000000298023223876953125);
+    highp vec3 Group_003_Group_001_Group_007_VectorMath_001_Vector_res = safe_divide(Group_003_Group_001_Group_007_VectorMath_Vector_res, Group_003_Group_001_Group_007_GroupInput_Radius_res);
+    highp float Group_003_Group_001_Group_007_VectorMath_003_Value_res = length(Group_003_Group_001_Group_007_VectorMath_001_Vector_res);
+    highp float Group_003_Group_001_Group_007_Math_001_Value_res = Group_003_Group_001_Group_007_VectorMath_003_Value_res - 1.0;
+    highp float Group_003_Group_001_Group_007_Math_002_Value_res = Group_003_Group_001_Group_007_Math_001_Value_res * Group_003_Group_001_Group_007_VectorMath_003_Value_res;
+    highp vec3 Group_003_Group_001_Group_007_VectorMath_004_Vector_res = Group_003_Group_001_Group_007_GroupInput_Radius_res * Group_003_Group_001_Group_007_GroupInput_Radius_res;
+    highp vec3 Group_003_Group_001_Group_007_VectorMath_005_Vector_res = safe_divide(Group_003_Group_001_Group_007_VectorMath_Vector_res, Group_003_Group_001_Group_007_VectorMath_004_Vector_res);
+    highp float Group_003_Group_001_Group_007_VectorMath_006_Value_res = length(Group_003_Group_001_Group_007_VectorMath_005_Vector_res);
+    highp float Group_003_Group_001_Group_007_Math_Value_res = Group_003_Group_001_Group_007_Math_002_Value_res / Group_003_Group_001_Group_007_VectorMath_006_Value_res;
+    highp float Group_001_Group_007_Group_003_Distance_res = Group_003_Group_001_Group_007_Math_Value_res;
+    highp float _2220;
+    if (true)
+    {
+        _2220 = min(Group_001_Group_007_Math_Value_res, Group_001_Group_007_Group_003_Distance_res) - (((((max(0.5 - abs(Group_001_Group_007_Math_Value_res - Group_001_Group_007_Group_003_Distance_res), 0.0) / 0.5) * (max(0.5 - abs(Group_001_Group_007_Math_Value_res - Group_001_Group_007_Group_003_Distance_res), 0.0) / 0.5)) * (max(0.5 - abs(Group_001_Group_007_Math_Value_res - Group_001_Group_007_Group_003_Distance_res), 0.0) / 0.5)) * 0.5) * 0.16666667163372039794921875);
+    }
+    else
+    {
+        _2220 = min(Group_001_Group_007_Math_Value_res, Group_001_Group_007_Group_003_Distance_res);
+    }
+    highp float Group_001_Group_007_Math_004_Value_res = _2220;
+    highp vec3 Group_005_Group_001_Group_007_GroupInput_Vector_res = Group_001_Group_007_GroupInput_Vector_res;
+    highp float Group_001_Group_007_Math_014_Value_res = Group_001_Group_007_ShaderData_Float_res * (-0.3589999973773956298828125);
+    highp float Group_001_Group_007_Math_018_Value_res = Group_001_Group_007_Math_014_Value_res + 0.39999997615814208984375;
+    highp float Group_001_Group_007_Math_013_Value_res = mod(Group_001_Group_007_Math_018_Value_res, 6.0);
+    highp float Group_001_Group_007_Math_012_Value_res = Group_001_Group_007_Math_013_Value_res - Group_001_Group_007_Math_019_Value_res;
+    highp vec3 Group_001_Group_007_CombineXYZ_003_Vector_res = vec3(-0.25, 0.1500000059604644775390625, Group_001_Group_007_Math_012_Value_res);
+    highp vec3 Group_005_Group_001_Group_007_GroupInput_Position_res = Group_001_Group_007_CombineXYZ_003_Vector_res;
+    highp vec3 Group_005_Group_001_Group_007_VectorMath_Vector_res = Group_005_Group_001_Group_007_GroupInput_Vector_res + Group_005_Group_001_Group_007_GroupInput_Position_res;
+    highp vec3 Group_005_Group_001_Group_007_GroupInput_Radius_res = vec3(0.1500000059604644775390625, 0.300000011920928955078125, 0.25);
+    highp vec3 Group_005_Group_001_Group_007_VectorMath_001_Vector_res = safe_divide(Group_005_Group_001_Group_007_VectorMath_Vector_res, Group_005_Group_001_Group_007_GroupInput_Radius_res);
+    highp float Group_005_Group_001_Group_007_VectorMath_003_Value_res = length(Group_005_Group_001_Group_007_VectorMath_001_Vector_res);
+    highp float Group_005_Group_001_Group_007_Math_001_Value_res = Group_005_Group_001_Group_007_VectorMath_003_Value_res - 1.0;
+    highp float Group_005_Group_001_Group_007_Math_002_Value_res = Group_005_Group_001_Group_007_Math_001_Value_res * Group_005_Group_001_Group_007_VectorMath_003_Value_res;
+    highp vec3 Group_005_Group_001_Group_007_VectorMath_004_Vector_res = Group_005_Group_001_Group_007_GroupInput_Radius_res * Group_005_Group_001_Group_007_GroupInput_Radius_res;
+    highp vec3 Group_005_Group_001_Group_007_VectorMath_005_Vector_res = safe_divide(Group_005_Group_001_Group_007_VectorMath_Vector_res, Group_005_Group_001_Group_007_VectorMath_004_Vector_res);
+    highp float Group_005_Group_001_Group_007_VectorMath_006_Value_res = length(Group_005_Group_001_Group_007_VectorMath_005_Vector_res);
+    highp float Group_005_Group_001_Group_007_Math_Value_res = Group_005_Group_001_Group_007_Math_002_Value_res / Group_005_Group_001_Group_007_VectorMath_006_Value_res;
+    highp float Group_001_Group_007_Group_005_Distance_res = Group_005_Group_001_Group_007_Math_Value_res;
+    highp float _2314;
+    if (true)
+    {
+        _2314 = min(Group_001_Group_007_Math_004_Value_res, Group_001_Group_007_Group_005_Distance_res) - (((((max(0.4000000059604644775390625 - abs(Group_001_Group_007_Math_004_Value_res - Group_001_Group_007_Group_005_Distance_res), 0.0) / 0.4000000059604644775390625) * (max(0.4000000059604644775390625 - abs(Group_001_Group_007_Math_004_Value_res - Group_001_Group_007_Group_005_Distance_res), 0.0) / 0.4000000059604644775390625)) * (max(0.4000000059604644775390625 - abs(Group_001_Group_007_Math_004_Value_res - Group_001_Group_007_Group_005_Distance_res), 0.0) / 0.4000000059604644775390625)) * 0.4000000059604644775390625) * 0.16666667163372039794921875);
+    }
+    else
+    {
+        _2314 = min(Group_001_Group_007_Math_004_Value_res, Group_001_Group_007_Group_005_Distance_res);
+    }
+    highp float Group_001_Group_007_Math_005_Value_res = _2314;
+    highp float Group_007_Group_001_Distance_res = Group_001_Group_007_Math_005_Value_res;
+    highp float Group_007_Math_Value_res = Group_007_Group_001_Distance_res + Group_007_GroupInput_Depth_res;
+    highp float Group_007_Depth_res = Group_007_Math_Value_res;
+    highp float Group_005_GroupInput_Depth_res = Group_007_Depth_res;
+    highp vec3 Group_005_VectorMath_001_Vector_res = Group_005_GroupInput_ViewDir_res * Group_005_GroupInput_Depth_res;
+    highp vec3 Group_005_VectorMath_Vector_res = Group_005_GroupInput_Cam_res + Group_005_VectorMath_001_Vector_res;
+    highp vec3 Group_001_Group_005_GroupInput_Vector_res = Group_005_VectorMath_Vector_res;
+    highp vec3 Group_Group_001_Group_005_GroupInput_Vector_res = Group_001_Group_005_GroupInput_Vector_res;
+    highp float Group_001_Group_005_ShaderData_Float_res = _time;
+    highp float Group_001_Group_005_Math_003_Value_res = Group_001_Group_005_ShaderData_Float_res * 0.333000004291534423828125;
+    highp float Group_001_Group_005_Math_015_Value_res = Group_001_Group_005_Math_003_Value_res + 2.7999999523162841796875;
+    highp float Group_001_Group_005_Math_001_Value_res = mod(Group_001_Group_005_Math_015_Value_res, 6.0);
+    highp float Group_001_Group_005_Math_019_Value_res = 3.0;
+    highp float Group_001_Group_005_Math_002_Value_res = Group_001_Group_005_Math_001_Value_res - Group_001_Group_005_Math_019_Value_res;
+    highp vec3 Group_001_Group_005_CombineXYZ_Vector_res = vec3(0.25, -0.1500000059604644775390625, Group_001_Group_005_Math_002_Value_res);
+    highp vec3 Group_Group_001_Group_005_GroupInput_Position_res = Group_001_Group_005_CombineXYZ_Vector_res;
+    highp vec3 Group_Group_001_Group_005_VectorMath_Vector_res = Group_Group_001_Group_005_GroupInput_Vector_res + Group_Group_001_Group_005_GroupInput_Position_res;
+    highp vec3 Group_Group_001_Group_005_GroupInput_Radius_res = vec3(0.25, 0.333000004291534423828125, 0.25);
+    highp vec3 Group_Group_001_Group_005_VectorMath_001_Vector_res = safe_divide(Group_Group_001_Group_005_VectorMath_Vector_res, Group_Group_001_Group_005_GroupInput_Radius_res);
+    highp float Group_Group_001_Group_005_VectorMath_003_Value_res = length(Group_Group_001_Group_005_VectorMath_001_Vector_res);
+    highp float Group_Group_001_Group_005_Math_001_Value_res = Group_Group_001_Group_005_VectorMath_003_Value_res - 1.0;
+    highp float Group_Group_001_Group_005_Math_002_Value_res = Group_Group_001_Group_005_Math_001_Value_res * Group_Group_001_Group_005_VectorMath_003_Value_res;
+    highp vec3 Group_Group_001_Group_005_VectorMath_004_Vector_res = Group_Group_001_Group_005_GroupInput_Radius_res * Group_Group_001_Group_005_GroupInput_Radius_res;
+    highp vec3 Group_Group_001_Group_005_VectorMath_005_Vector_res = safe_divide(Group_Group_001_Group_005_VectorMath_Vector_res, Group_Group_001_Group_005_VectorMath_004_Vector_res);
+    highp float Group_Group_001_Group_005_VectorMath_006_Value_res = length(Group_Group_001_Group_005_VectorMath_005_Vector_res);
+    highp float Group_Group_001_Group_005_Math_Value_res = Group_Group_001_Group_005_Math_002_Value_res / Group_Group_001_Group_005_VectorMath_006_Value_res;
+    highp float Group_001_Group_005_Group_Distance_res = Group_Group_001_Group_005_Math_Value_res;
+    highp vec3 Group_002_Group_001_Group_005_GroupInput_Vector_res = Group_001_Group_005_GroupInput_Vector_res;
+    highp float Group_001_Group_005_Math_008_Value_res = Group_001_Group_005_ShaderData_Float_res * (-0.45899999141693115234375);
+    highp float Group_001_Group_005_Math_017_Value_res = Group_001_Group_005_Math_008_Value_res + 1.7999999523162841796875;
+    highp float Group_001_Group_005_Math_007_Value_res = mod(Group_001_Group_005_Math_017_Value_res, 6.0);
+    highp float Group_001_Group_005_Math_006_Value_res = Group_001_Group_005_Math_007_Value_res - Group_001_Group_005_Math_019_Value_res;
+    highp vec3 Group_001_Group_005_CombineXYZ_001_Vector_res = vec3(0.1500000059604644775390625, -0.25, Group_001_Group_005_Math_006_Value_res);
+    highp vec3 Group_002_Group_001_Group_005_GroupInput_Position_res = Group_001_Group_005_CombineXYZ_001_Vector_res;
+    highp vec3 Group_002_Group_001_Group_005_VectorMath_Vector_res = Group_002_Group_001_Group_005_GroupInput_Vector_res + Group_002_Group_001_Group_005_GroupInput_Position_res;
+    highp vec3 Group_002_Group_001_Group_005_GroupInput_Radius_res = vec3(0.25, 0.1500000059604644775390625, 0.1500000059604644775390625);
+    highp vec3 Group_002_Group_001_Group_005_VectorMath_001_Vector_res = safe_divide(Group_002_Group_001_Group_005_VectorMath_Vector_res, Group_002_Group_001_Group_005_GroupInput_Radius_res);
+    highp float Group_002_Group_001_Group_005_VectorMath_003_Value_res = length(Group_002_Group_001_Group_005_VectorMath_001_Vector_res);
+    highp float Group_002_Group_001_Group_005_Math_001_Value_res = Group_002_Group_001_Group_005_VectorMath_003_Value_res - 1.0;
+    highp float Group_002_Group_001_Group_005_Math_002_Value_res = Group_002_Group_001_Group_005_Math_001_Value_res * Group_002_Group_001_Group_005_VectorMath_003_Value_res;
+    highp vec3 Group_002_Group_001_Group_005_VectorMath_004_Vector_res = Group_002_Group_001_Group_005_GroupInput_Radius_res * Group_002_Group_001_Group_005_GroupInput_Radius_res;
+    highp vec3 Group_002_Group_001_Group_005_VectorMath_005_Vector_res = safe_divide(Group_002_Group_001_Group_005_VectorMath_Vector_res, Group_002_Group_001_Group_005_VectorMath_004_Vector_res);
+    highp float Group_002_Group_001_Group_005_VectorMath_006_Value_res = length(Group_002_Group_001_Group_005_VectorMath_005_Vector_res);
+    highp float Group_002_Group_001_Group_005_Math_Value_res = Group_002_Group_001_Group_005_Math_002_Value_res / Group_002_Group_001_Group_005_VectorMath_006_Value_res;
+    highp float Group_001_Group_005_Group_002_Distance_res = Group_002_Group_001_Group_005_Math_Value_res;
+    highp float _2487;
+    if (true)
+    {
+        _2487 = min(Group_001_Group_005_Group_Distance_res, Group_001_Group_005_Group_002_Distance_res) - (((((max(0.7999999523162841796875 - abs(Group_001_Group_005_Group_Distance_res - Group_001_Group_005_Group_002_Distance_res), 0.0) / 0.7999999523162841796875) * (max(0.7999999523162841796875 - abs(Group_001_Group_005_Group_Distance_res - Group_001_Group_005_Group_002_Distance_res), 0.0) / 0.7999999523162841796875)) * (max(0.7999999523162841796875 - abs(Group_001_Group_005_Group_Distance_res - Group_001_Group_005_Group_002_Distance_res), 0.0) / 0.7999999523162841796875)) * 0.7999999523162841796875) * 0.16666667163372039794921875);
+    }
+    else
+    {
+        _2487 = min(Group_001_Group_005_Group_Distance_res, Group_001_Group_005_Group_002_Distance_res);
+    }
+    highp float Group_001_Group_005_Math_Value_res = _2487;
+    highp vec3 Group_003_Group_001_Group_005_GroupInput_Vector_res = Group_001_Group_005_GroupInput_Vector_res;
+    highp float Group_001_Group_005_Math_011_Value_res = Group_001_Group_005_ShaderData_Float_res * 0.5;
+    highp float Group_001_Group_005_Math_016_Value_res = Group_001_Group_005_Math_011_Value_res + 1.099999904632568359375;
+    highp float Group_001_Group_005_Math_010_Value_res = mod(Group_001_Group_005_Math_016_Value_res, 6.0);
+    highp float Group_001_Group_005_Math_009_Value_res = Group_001_Group_005_Math_010_Value_res - Group_001_Group_005_Math_019_Value_res;
+    highp vec3 Group_001_Group_005_CombineXYZ_002_Vector_res = vec3(-0.1500000059604644775390625, 0.25, Group_001_Group_005_Math_009_Value_res);
+    highp vec3 Group_003_Group_001_Group_005_GroupInput_Position_res = Group_001_Group_005_CombineXYZ_002_Vector_res;
+    highp vec3 Group_003_Group_001_Group_005_VectorMath_Vector_res = Group_003_Group_001_Group_005_GroupInput_Vector_res + Group_003_Group_001_Group_005_GroupInput_Position_res;
+    highp vec3 Group_003_Group_001_Group_005_GroupInput_Radius_res = vec3(0.300000011920928955078125, 0.12999999523162841796875, 0.20000000298023223876953125);
+    highp vec3 Group_003_Group_001_Group_005_VectorMath_001_Vector_res = safe_divide(Group_003_Group_001_Group_005_VectorMath_Vector_res, Group_003_Group_001_Group_005_GroupInput_Radius_res);
+    highp float Group_003_Group_001_Group_005_VectorMath_003_Value_res = length(Group_003_Group_001_Group_005_VectorMath_001_Vector_res);
+    highp float Group_003_Group_001_Group_005_Math_001_Value_res = Group_003_Group_001_Group_005_VectorMath_003_Value_res - 1.0;
+    highp float Group_003_Group_001_Group_005_Math_002_Value_res = Group_003_Group_001_Group_005_Math_001_Value_res * Group_003_Group_001_Group_005_VectorMath_003_Value_res;
+    highp vec3 Group_003_Group_001_Group_005_VectorMath_004_Vector_res = Group_003_Group_001_Group_005_GroupInput_Radius_res * Group_003_Group_001_Group_005_GroupInput_Radius_res;
+    highp vec3 Group_003_Group_001_Group_005_VectorMath_005_Vector_res = safe_divide(Group_003_Group_001_Group_005_VectorMath_Vector_res, Group_003_Group_001_Group_005_VectorMath_004_Vector_res);
+    highp float Group_003_Group_001_Group_005_VectorMath_006_Value_res = length(Group_003_Group_001_Group_005_VectorMath_005_Vector_res);
+    highp float Group_003_Group_001_Group_005_Math_Value_res = Group_003_Group_001_Group_005_Math_002_Value_res / Group_003_Group_001_Group_005_VectorMath_006_Value_res;
+    highp float Group_001_Group_005_Group_003_Distance_res = Group_003_Group_001_Group_005_Math_Value_res;
+    highp float _2581;
+    if (true)
+    {
+        _2581 = min(Group_001_Group_005_Math_Value_res, Group_001_Group_005_Group_003_Distance_res) - (((((max(0.5 - abs(Group_001_Group_005_Math_Value_res - Group_001_Group_005_Group_003_Distance_res), 0.0) / 0.5) * (max(0.5 - abs(Group_001_Group_005_Math_Value_res - Group_001_Group_005_Group_003_Distance_res), 0.0) / 0.5)) * (max(0.5 - abs(Group_001_Group_005_Math_Value_res - Group_001_Group_005_Group_003_Distance_res), 0.0) / 0.5)) * 0.5) * 0.16666667163372039794921875);
+    }
+    else
+    {
+        _2581 = min(Group_001_Group_005_Math_Value_res, Group_001_Group_005_Group_003_Distance_res);
+    }
+    highp float Group_001_Group_005_Math_004_Value_res = _2581;
+    highp vec3 Group_005_Group_001_Group_005_GroupInput_Vector_res = Group_001_Group_005_GroupInput_Vector_res;
+    highp float Group_001_Group_005_Math_014_Value_res = Group_001_Group_005_ShaderData_Float_res * (-0.3589999973773956298828125);
+    highp float Group_001_Group_005_Math_018_Value_res = Group_001_Group_005_Math_014_Value_res + 0.39999997615814208984375;
+    highp float Group_001_Group_005_Math_013_Value_res = mod(Group_001_Group_005_Math_018_Value_res, 6.0);
+    highp float Group_001_Group_005_Math_012_Value_res = Group_001_Group_005_Math_013_Value_res - Group_001_Group_005_Math_019_Value_res;
+    highp vec3 Group_001_Group_005_CombineXYZ_003_Vector_res = vec3(-0.25, 0.1500000059604644775390625, Group_001_Group_005_Math_012_Value_res);
+    highp vec3 Group_005_Group_001_Group_005_GroupInput_Position_res = Group_001_Group_005_CombineXYZ_003_Vector_res;
+    highp vec3 Group_005_Group_001_Group_005_VectorMath_Vector_res = Group_005_Group_001_Group_005_GroupInput_Vector_res + Group_005_Group_001_Group_005_GroupInput_Position_res;
+    highp vec3 Group_005_Group_001_Group_005_GroupInput_Radius_res = vec3(0.1500000059604644775390625, 0.300000011920928955078125, 0.25);
+    highp vec3 Group_005_Group_001_Group_005_VectorMath_001_Vector_res = safe_divide(Group_005_Group_001_Group_005_VectorMath_Vector_res, Group_005_Group_001_Group_005_GroupInput_Radius_res);
+    highp float Group_005_Group_001_Group_005_VectorMath_003_Value_res = length(Group_005_Group_001_Group_005_VectorMath_001_Vector_res);
+    highp float Group_005_Group_001_Group_005_Math_001_Value_res = Group_005_Group_001_Group_005_VectorMath_003_Value_res - 1.0;
+    highp float Group_005_Group_001_Group_005_Math_002_Value_res = Group_005_Group_001_Group_005_Math_001_Value_res * Group_005_Group_001_Group_005_VectorMath_003_Value_res;
+    highp vec3 Group_005_Group_001_Group_005_VectorMath_004_Vector_res = Group_005_Group_001_Group_005_GroupInput_Radius_res * Group_005_Group_001_Group_005_GroupInput_Radius_res;
+    highp vec3 Group_005_Group_001_Group_005_VectorMath_005_Vector_res = safe_divide(Group_005_Group_001_Group_005_VectorMath_Vector_res, Group_005_Group_001_Group_005_VectorMath_004_Vector_res);
+    highp float Group_005_Group_001_Group_005_VectorMath_006_Value_res = length(Group_005_Group_001_Group_005_VectorMath_005_Vector_res);
+    highp float Group_005_Group_001_Group_005_Math_Value_res = Group_005_Group_001_Group_005_Math_002_Value_res / Group_005_Group_001_Group_005_VectorMath_006_Value_res;
+    highp float Group_001_Group_005_Group_005_Distance_res = Group_005_Group_001_Group_005_Math_Value_res;
+    highp float _2675;
+    if (true)
+    {
+        _2675 = min(Group_001_Group_005_Math_004_Value_res, Group_001_Group_005_Group_005_Distance_res) - (((((max(0.4000000059604644775390625 - abs(Group_001_Group_005_Math_004_Value_res - Group_001_Group_005_Group_005_Distance_res), 0.0) / 0.4000000059604644775390625) * (max(0.4000000059604644775390625 - abs(Group_001_Group_005_Math_004_Value_res - Group_001_Group_005_Group_005_Distance_res), 0.0) / 0.4000000059604644775390625)) * (max(0.4000000059604644775390625 - abs(Group_001_Group_005_Math_004_Value_res - Group_001_Group_005_Group_005_Distance_res), 0.0) / 0.4000000059604644775390625)) * 0.4000000059604644775390625) * 0.16666667163372039794921875);
+    }
+    else
+    {
+        _2675 = min(Group_001_Group_005_Math_004_Value_res, Group_001_Group_005_Group_005_Distance_res);
+    }
+    highp float Group_001_Group_005_Math_005_Value_res = _2675;
+    highp float Group_005_Group_001_Distance_res = Group_001_Group_005_Math_005_Value_res;
+    highp float Group_005_Math_Value_res = Group_005_Group_001_Distance_res + Group_005_GroupInput_Depth_res;
+    highp float Group_005_Depth_res = Group_005_Math_Value_res;
+    highp float Group_006_GroupInput_Depth_res = Group_005_Depth_res;
+    highp vec3 Group_006_VectorMath_001_Vector_res = Group_006_GroupInput_ViewDir_res * Group_006_GroupInput_Depth_res;
+    highp vec3 Group_006_VectorMath_Vector_res = Group_006_GroupInput_Cam_res + Group_006_VectorMath_001_Vector_res;
+    highp vec3 Group_001_Group_006_GroupInput_Vector_res = Group_006_VectorMath_Vector_res;
+    highp vec3 Group_Group_001_Group_006_GroupInput_Vector_res = Group_001_Group_006_GroupInput_Vector_res;
+    highp float Group_001_Group_006_ShaderData_Float_res = _time;
+    highp float Group_001_Group_006_Math_003_Value_res = Group_001_Group_006_ShaderData_Float_res * 0.333000004291534423828125;
+    highp float Group_001_Group_006_Math_015_Value_res = Group_001_Group_006_Math_003_Value_res + 2.7999999523162841796875;
+    highp float Group_001_Group_006_Math_001_Value_res = mod(Group_001_Group_006_Math_015_Value_res, 6.0);
+    highp float Group_001_Group_006_Math_019_Value_res = 3.0;
+    highp float Group_001_Group_006_Math_002_Value_res = Group_001_Group_006_Math_001_Value_res - Group_001_Group_006_Math_019_Value_res;
+    highp vec3 Group_001_Group_006_CombineXYZ_Vector_res = vec3(0.25, -0.1500000059604644775390625, Group_001_Group_006_Math_002_Value_res);
+    highp vec3 Group_Group_001_Group_006_GroupInput_Position_res = Group_001_Group_006_CombineXYZ_Vector_res;
+    highp vec3 Group_Group_001_Group_006_VectorMath_Vector_res = Group_Group_001_Group_006_GroupInput_Vector_res + Group_Group_001_Group_006_GroupInput_Position_res;
+    highp vec3 Group_Group_001_Group_006_GroupInput_Radius_res = vec3(0.25, 0.333000004291534423828125, 0.25);
+    highp vec3 Group_Group_001_Group_006_VectorMath_001_Vector_res = safe_divide(Group_Group_001_Group_006_VectorMath_Vector_res, Group_Group_001_Group_006_GroupInput_Radius_res);
+    highp float Group_Group_001_Group_006_VectorMath_003_Value_res = length(Group_Group_001_Group_006_VectorMath_001_Vector_res);
+    highp float Group_Group_001_Group_006_Math_001_Value_res = Group_Group_001_Group_006_VectorMath_003_Value_res - 1.0;
+    highp float Group_Group_001_Group_006_Math_002_Value_res = Group_Group_001_Group_006_Math_001_Value_res * Group_Group_001_Group_006_VectorMath_003_Value_res;
+    highp vec3 Group_Group_001_Group_006_VectorMath_004_Vector_res = Group_Group_001_Group_006_GroupInput_Radius_res * Group_Group_001_Group_006_GroupInput_Radius_res;
+    highp vec3 Group_Group_001_Group_006_VectorMath_005_Vector_res = safe_divide(Group_Group_001_Group_006_VectorMath_Vector_res, Group_Group_001_Group_006_VectorMath_004_Vector_res);
+    highp float Group_Group_001_Group_006_VectorMath_006_Value_res = length(Group_Group_001_Group_006_VectorMath_005_Vector_res);
+    highp float Group_Group_001_Group_006_Math_Value_res = Group_Group_001_Group_006_Math_002_Value_res / Group_Group_001_Group_006_VectorMath_006_Value_res;
+    highp float Group_001_Group_006_Group_Distance_res = Group_Group_001_Group_006_Math_Value_res;
+    highp vec3 Group_002_Group_001_Group_006_GroupInput_Vector_res = Group_001_Group_006_GroupInput_Vector_res;
+    highp float Group_001_Group_006_Math_008_Value_res = Group_001_Group_006_ShaderData_Float_res * (-0.45899999141693115234375);
+    highp float Group_001_Group_006_Math_017_Value_res = Group_001_Group_006_Math_008_Value_res + 1.7999999523162841796875;
+    highp float Group_001_Group_006_Math_007_Value_res = mod(Group_001_Group_006_Math_017_Value_res, 6.0);
+    highp float Group_001_Group_006_Math_006_Value_res = Group_001_Group_006_Math_007_Value_res - Group_001_Group_006_Math_019_Value_res;
+    highp vec3 Group_001_Group_006_CombineXYZ_001_Vector_res = vec3(0.1500000059604644775390625, -0.25, Group_001_Group_006_Math_006_Value_res);
+    highp vec3 Group_002_Group_001_Group_006_GroupInput_Position_res = Group_001_Group_006_CombineXYZ_001_Vector_res;
+    highp vec3 Group_002_Group_001_Group_006_VectorMath_Vector_res = Group_002_Group_001_Group_006_GroupInput_Vector_res + Group_002_Group_001_Group_006_GroupInput_Position_res;
+    highp vec3 Group_002_Group_001_Group_006_GroupInput_Radius_res = vec3(0.25, 0.1500000059604644775390625, 0.1500000059604644775390625);
+    highp vec3 Group_002_Group_001_Group_006_VectorMath_001_Vector_res = safe_divide(Group_002_Group_001_Group_006_VectorMath_Vector_res, Group_002_Group_001_Group_006_GroupInput_Radius_res);
+    highp float Group_002_Group_001_Group_006_VectorMath_003_Value_res = length(Group_002_Group_001_Group_006_VectorMath_001_Vector_res);
+    highp float Group_002_Group_001_Group_006_Math_001_Value_res = Group_002_Group_001_Group_006_VectorMath_003_Value_res - 1.0;
+    highp float Group_002_Group_001_Group_006_Math_002_Value_res = Group_002_Group_001_Group_006_Math_001_Value_res * Group_002_Group_001_Group_006_VectorMath_003_Value_res;
+    highp vec3 Group_002_Group_001_Group_006_VectorMath_004_Vector_res = Group_002_Group_001_Group_006_GroupInput_Radius_res * Group_002_Group_001_Group_006_GroupInput_Radius_res;
+    highp vec3 Group_002_Group_001_Group_006_VectorMath_005_Vector_res = safe_divide(Group_002_Group_001_Group_006_VectorMath_Vector_res, Group_002_Group_001_Group_006_VectorMath_004_Vector_res);
+    highp float Group_002_Group_001_Group_006_VectorMath_006_Value_res = length(Group_002_Group_001_Group_006_VectorMath_005_Vector_res);
+    highp float Group_002_Group_001_Group_006_Math_Value_res = Group_002_Group_001_Group_006_Math_002_Value_res / Group_002_Group_001_Group_006_VectorMath_006_Value_res;
+    highp float Group_001_Group_006_Group_002_Distance_res = Group_002_Group_001_Group_006_Math_Value_res;
+    highp float _2848;
+    if (true)
+    {
+        _2848 = min(Group_001_Group_006_Group_Distance_res, Group_001_Group_006_Group_002_Distance_res) - (((((max(0.7999999523162841796875 - abs(Group_001_Group_006_Group_Distance_res - Group_001_Group_006_Group_002_Distance_res), 0.0) / 0.7999999523162841796875) * (max(0.7999999523162841796875 - abs(Group_001_Group_006_Group_Distance_res - Group_001_Group_006_Group_002_Distance_res), 0.0) / 0.7999999523162841796875)) * (max(0.7999999523162841796875 - abs(Group_001_Group_006_Group_Distance_res - Group_001_Group_006_Group_002_Distance_res), 0.0) / 0.7999999523162841796875)) * 0.7999999523162841796875) * 0.16666667163372039794921875);
+    }
+    else
+    {
+        _2848 = min(Group_001_Group_006_Group_Distance_res, Group_001_Group_006_Group_002_Distance_res);
+    }
+    highp float Group_001_Group_006_Math_Value_res = _2848;
+    highp vec3 Group_003_Group_001_Group_006_GroupInput_Vector_res = Group_001_Group_006_GroupInput_Vector_res;
+    highp float Group_001_Group_006_Math_011_Value_res = Group_001_Group_006_ShaderData_Float_res * 0.5;
+    highp float Group_001_Group_006_Math_016_Value_res = Group_001_Group_006_Math_011_Value_res + 1.099999904632568359375;
+    highp float Group_001_Group_006_Math_010_Value_res = mod(Group_001_Group_006_Math_016_Value_res, 6.0);
+    highp float Group_001_Group_006_Math_009_Value_res = Group_001_Group_006_Math_010_Value_res - Group_001_Group_006_Math_019_Value_res;
+    highp vec3 Group_001_Group_006_CombineXYZ_002_Vector_res = vec3(-0.1500000059604644775390625, 0.25, Group_001_Group_006_Math_009_Value_res);
+    highp vec3 Group_003_Group_001_Group_006_GroupInput_Position_res = Group_001_Group_006_CombineXYZ_002_Vector_res;
+    highp vec3 Group_003_Group_001_Group_006_VectorMath_Vector_res = Group_003_Group_001_Group_006_GroupInput_Vector_res + Group_003_Group_001_Group_006_GroupInput_Position_res;
+    highp vec3 Group_003_Group_001_Group_006_GroupInput_Radius_res = vec3(0.300000011920928955078125, 0.12999999523162841796875, 0.20000000298023223876953125);
+    highp vec3 Group_003_Group_001_Group_006_VectorMath_001_Vector_res = safe_divide(Group_003_Group_001_Group_006_VectorMath_Vector_res, Group_003_Group_001_Group_006_GroupInput_Radius_res);
+    highp float Group_003_Group_001_Group_006_VectorMath_003_Value_res = length(Group_003_Group_001_Group_006_VectorMath_001_Vector_res);
+    highp float Group_003_Group_001_Group_006_Math_001_Value_res = Group_003_Group_001_Group_006_VectorMath_003_Value_res - 1.0;
+    highp float Group_003_Group_001_Group_006_Math_002_Value_res = Group_003_Group_001_Group_006_Math_001_Value_res * Group_003_Group_001_Group_006_VectorMath_003_Value_res;
+    highp vec3 Group_003_Group_001_Group_006_VectorMath_004_Vector_res = Group_003_Group_001_Group_006_GroupInput_Radius_res * Group_003_Group_001_Group_006_GroupInput_Radius_res;
+    highp vec3 Group_003_Group_001_Group_006_VectorMath_005_Vector_res = safe_divide(Group_003_Group_001_Group_006_VectorMath_Vector_res, Group_003_Group_001_Group_006_VectorMath_004_Vector_res);
+    highp float Group_003_Group_001_Group_006_VectorMath_006_Value_res = length(Group_003_Group_001_Group_006_VectorMath_005_Vector_res);
+    highp float Group_003_Group_001_Group_006_Math_Value_res = Group_003_Group_001_Group_006_Math_002_Value_res / Group_003_Group_001_Group_006_VectorMath_006_Value_res;
+    highp float Group_001_Group_006_Group_003_Distance_res = Group_003_Group_001_Group_006_Math_Value_res;
+    highp float _2942;
+    if (true)
+    {
+        _2942 = min(Group_001_Group_006_Math_Value_res, Group_001_Group_006_Group_003_Distance_res) - (((((max(0.5 - abs(Group_001_Group_006_Math_Value_res - Group_001_Group_006_Group_003_Distance_res), 0.0) / 0.5) * (max(0.5 - abs(Group_001_Group_006_Math_Value_res - Group_001_Group_006_Group_003_Distance_res), 0.0) / 0.5)) * (max(0.5 - abs(Group_001_Group_006_Math_Value_res - Group_001_Group_006_Group_003_Distance_res), 0.0) / 0.5)) * 0.5) * 0.16666667163372039794921875);
+    }
+    else
+    {
+        _2942 = min(Group_001_Group_006_Math_Value_res, Group_001_Group_006_Group_003_Distance_res);
+    }
+    highp float Group_001_Group_006_Math_004_Value_res = _2942;
+    highp vec3 Group_005_Group_001_Group_006_GroupInput_Vector_res = Group_001_Group_006_GroupInput_Vector_res;
+    highp float Group_001_Group_006_Math_014_Value_res = Group_001_Group_006_ShaderData_Float_res * (-0.3589999973773956298828125);
+    highp float Group_001_Group_006_Math_018_Value_res = Group_001_Group_006_Math_014_Value_res + 0.39999997615814208984375;
+    highp float Group_001_Group_006_Math_013_Value_res = mod(Group_001_Group_006_Math_018_Value_res, 6.0);
+    highp float Group_001_Group_006_Math_012_Value_res = Group_001_Group_006_Math_013_Value_res - Group_001_Group_006_Math_019_Value_res;
+    highp vec3 Group_001_Group_006_CombineXYZ_003_Vector_res = vec3(-0.25, 0.1500000059604644775390625, Group_001_Group_006_Math_012_Value_res);
+    highp vec3 Group_005_Group_001_Group_006_GroupInput_Position_res = Group_001_Group_006_CombineXYZ_003_Vector_res;
+    highp vec3 Group_005_Group_001_Group_006_VectorMath_Vector_res = Group_005_Group_001_Group_006_GroupInput_Vector_res + Group_005_Group_001_Group_006_GroupInput_Position_res;
+    highp vec3 Group_005_Group_001_Group_006_GroupInput_Radius_res = vec3(0.1500000059604644775390625, 0.300000011920928955078125, 0.25);
+    highp vec3 Group_005_Group_001_Group_006_VectorMath_001_Vector_res = safe_divide(Group_005_Group_001_Group_006_VectorMath_Vector_res, Group_005_Group_001_Group_006_GroupInput_Radius_res);
+    highp float Group_005_Group_001_Group_006_VectorMath_003_Value_res = length(Group_005_Group_001_Group_006_VectorMath_001_Vector_res);
+    highp float Group_005_Group_001_Group_006_Math_001_Value_res = Group_005_Group_001_Group_006_VectorMath_003_Value_res - 1.0;
+    highp float Group_005_Group_001_Group_006_Math_002_Value_res = Group_005_Group_001_Group_006_Math_001_Value_res * Group_005_Group_001_Group_006_VectorMath_003_Value_res;
+    highp vec3 Group_005_Group_001_Group_006_VectorMath_004_Vector_res = Group_005_Group_001_Group_006_GroupInput_Radius_res * Group_005_Group_001_Group_006_GroupInput_Radius_res;
+    highp vec3 Group_005_Group_001_Group_006_VectorMath_005_Vector_res = safe_divide(Group_005_Group_001_Group_006_VectorMath_Vector_res, Group_005_Group_001_Group_006_VectorMath_004_Vector_res);
+    highp float Group_005_Group_001_Group_006_VectorMath_006_Value_res = length(Group_005_Group_001_Group_006_VectorMath_005_Vector_res);
+    highp float Group_005_Group_001_Group_006_Math_Value_res = Group_005_Group_001_Group_006_Math_002_Value_res / Group_005_Group_001_Group_006_VectorMath_006_Value_res;
+    highp float Group_001_Group_006_Group_005_Distance_res = Group_005_Group_001_Group_006_Math_Value_res;
+    highp float _3036;
+    if (true)
+    {
+        _3036 = min(Group_001_Group_006_Math_004_Value_res, Group_001_Group_006_Group_005_Distance_res) - (((((max(0.4000000059604644775390625 - abs(Group_001_Group_006_Math_004_Value_res - Group_001_Group_006_Group_005_Distance_res), 0.0) / 0.4000000059604644775390625) * (max(0.4000000059604644775390625 - abs(Group_001_Group_006_Math_004_Value_res - Group_001_Group_006_Group_005_Distance_res), 0.0) / 0.4000000059604644775390625)) * (max(0.4000000059604644775390625 - abs(Group_001_Group_006_Math_004_Value_res - Group_001_Group_006_Group_005_Distance_res), 0.0) / 0.4000000059604644775390625)) * 0.4000000059604644775390625) * 0.16666667163372039794921875);
+    }
+    else
+    {
+        _3036 = min(Group_001_Group_006_Math_004_Value_res, Group_001_Group_006_Group_005_Distance_res);
+    }
+    highp float Group_001_Group_006_Math_005_Value_res = _3036;
+    highp float Group_006_Group_001_Distance_res = Group_001_Group_006_Math_005_Value_res;
+    highp float Group_006_Distance_res = Group_006_Group_001_Distance_res;
+    highp float MixShader_fac = clamp(Group_006_Distance_res, 0.0, 1.0);
+    highp float MixShader_fac_inv = 1.0 - MixShader_fac;
+    highp float opacity = ((1.0 * MixShader_fac_inv) + (0.0 * MixShader_fac)) - 0.00019999999494757503271102905273438;
+    if (opacity < 0.5)
+    {
+        discard;
+    }
+}
+
